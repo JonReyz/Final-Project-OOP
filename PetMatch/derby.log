@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Tue Jun 06 09:46:19 BRT 2017:
+ Inicializando o Derby versão The Apache Software Foundation - Apache Derby - 10.13.1.1 - (1765088): instância a816c00e-015c-7d71-0c1b-000000cb2098
+no diretório de banco de dados C:\Users\JOAO PEDRO\Desktop\POO\PetMatch\Data\database 
+
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_131-b11
+user.dir=C:\Users\JOAO PEDRO\Desktop\POO\PetMatch
+os.name=Windows 7
+os.arch=x86
+os.version=6.1
+derby.system.home=null
+Carregador de classe do banco de dados iniciado - derby.database.classpath=''
