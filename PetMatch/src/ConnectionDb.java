@@ -12,7 +12,7 @@ public class ConnectionDb {
 	boolean start = false;
 	
 	/**
-	 * Construtor da classe, quando é chamado cria a conexão com o banco de dados
+	 * Construtor da classe, quando ï¿½ chamado cria a conexï¿½o com o banco de dados
 	 */
 	public ConnectionDb(){
 		System.out.println("Trying to connect with the database...");
@@ -27,14 +27,14 @@ public class ConnectionDb {
 	}
 	
 	/**
-	 * Função que é responsável por criar uma tabela no banco de dados
-	 * @param sql Comando sql para a criação da tabela
+	 * Funï¿½ï¿½o que ï¿½ responsï¿½vel por criar uma tabela no banco de dados
+	 * @param sql Comando sql para a criaï¿½ï¿½o da tabela
 	 * @param sql2 Comando em sql usado para verificar se a tabela existe (select * from X)
 	 * @throws SQLException
 	 */
 	public void createTable(String sql,String sql2) throws SQLException{
 		Statement s = con.createStatement();
-		//Se a tabela não existe, ela é criada
+		//Se a tabela nï¿½o existe, ela ï¿½ criada
 		if(!ConnectionDb.tableExists(con,sql2)){
 			 System.out.println (" . . . . creating table");
              s.execute(sql);
@@ -44,7 +44,7 @@ public class ConnectionDb {
 	
 	
 	/**
-	 * Função que recebe dois comandos sqls, um de inserção e outro para a verificação da existência da tabela
+	 * Funï¿½ï¿½o que recebe dois comandos sqls, um de inserï¿½ï¿½o e outro para a verificaï¿½ï¿½o da existï¿½ncia da tabela
 	 * @param sql (insert ...)
 	 * @param sql2 (select * from X)
 	 * @throws SQLException
@@ -60,9 +60,9 @@ public class ConnectionDb {
 	}
 	
 	/**
-	 * Função responsável por promover a deleção de um registro em uma tabela qualquer
+	 * Funï¿½ï¿½o responsï¿½vel por promover a deleï¿½ï¿½o de um registro em uma tabela qualquer
 	 * @param table Recebe uma string com o nome da tabela
-	 * @param condition Recebe uma string com o campo onde a condição deve ser respeitada
+	 * @param condition Recebe uma string com o campo onde a condiï¿½ï¿½o deve ser respeitada
 	 * @param name Identificador de qual registro deve ser apagado
 	 */
 	public void deleteTable(String table,String condition, String name){
@@ -76,16 +76,16 @@ public class ConnectionDb {
             ps.close();
 		}
         catch (SQLException e){   
-            System.out.println("Erro ao fazer a deleção da tabela");
+            System.out.println("Erro ao fazer a deleï¿½ï¿½o da tabela");
             e.printStackTrace();   
         }
 
 	}
 	
 	/**
-	 * Função responsável por executar um update em uma tabela no banco de dados
+	 * Funï¿½ï¿½o responsï¿½vel por executar um update em uma tabela no banco de dados
 	 * @param sql Comando sql para executar o update
-	 * @param sql2 Comando em sql para executar a verificação da existência de tabela (select * from X)
+	 * @param sql2 Comando em sql para executar a verificaï¿½ï¿½o da existï¿½ncia de tabela (select * from X)
 	 * @throws SQLException
 	 */
 	public void updateTable(String sql, String sql2) throws SQLException{
@@ -94,12 +94,12 @@ public class ConnectionDb {
 			psInsert = con.prepareStatement(sql); 
 			psInsert.executeUpdate();
 			psInsert.close();
-			System.out.println("Alteração realizada com sucesso");
+			System.out.println("Alteraï¿½ï¿½o realizada com sucesso");
 		}
 	}
 	
 	/**
-	 * Função recebe o nome da tabela, o numero de campos e printa todo o conteudo da mesma, se ela existir
+	 * Funï¿½ï¿½o recebe o nome da tabela, o numero de campos e printa todo o conteudo da mesma, se ela existir
 	 * @param table
 	 * @param fields
 	 */
@@ -124,7 +124,7 @@ public class ConnectionDb {
 	}
 	
 	/**
-	 * Função para fechar a conexão com o banco de dados
+	 * Funï¿½ï¿½o para fechar a conexï¿½o com o banco de dados
 	 * @throws SQLException
 	 */
 	public void closeDB() throws SQLException{
@@ -132,9 +132,9 @@ public class ConnectionDb {
 		System.out.println("Closing the database...");
 	}
 	/**
-	 * Função que verifica se a tabela já está criada no bando de dados
+	 * Funï¿½ï¿½o que verifica se a tabela jï¿½ estï¿½ criada no bando de dados
 	 * @param con 
-	 * @param sql Comando em sql que irá fazer essa verificação (select * from X)
+	 * @param sql Comando em sql que irï¿½ fazer essa verificaï¿½ï¿½o (select * from X)
 	 * @return
 	 */
 	public static boolean tableExists(Connection con, String sql){
@@ -154,18 +154,18 @@ public class ConnectionDb {
 		
 		String create = "create table teste123 (id int not null generated always as identity constraint use_pk primary key, name varchar(30) not null, passwd varchar(30) not null)";
 		String ver = "select * from teste123";
-		String update="update teste123 set passwd = '2333' where name ='Testão'";
+		String update="update teste123 set passwd = '2333' where name ='Testï¿½o'";
 		
 		ConnectionDb db = new ConnectionDb();
 		
 		
-		String insert = "insert into teste123(name,passwd) values('João', '123456')";
+		String insert = "insert into teste123(name,passwd) values('Joï¿½o', '123456')";
 		String table = "teste123";
 		try {
 			db.createTable(create, ver);
 			//db.insertTable(insert, ver);
 			db.getAllTable(table, 3);
-			//db.deleteTable(table,"name", "João");
+			//db.deleteTable(table,"name", "Joï¿½o");
 			db.updateTable(update, ver);
 			db.getAllTable(table, 3);
 			db.closeDB();
