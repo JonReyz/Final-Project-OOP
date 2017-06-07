@@ -142,32 +142,46 @@ public class ConnectionDb {
 			Statement s = con.createStatement();
 			s.execute(sql);
 			s.close();
+			System.out.println("Tabela existe");
+			return true;
 		} catch (SQLException sqle){
 			String error = sqle.getSQLState();
+			System.out.println("Tabela não existente...");
 			return false;
 		}
-		return true;
 	}
 	
 	
 	public static void main(String[] args) {
 		
 		String create = "create table teste123 (id int not null generated always as identity constraint use_pk primary key, name varchar(30) not null, passwd varchar(30) not null)";
-		String ver = "select * from teste123";
-		String update="update teste123 set passwd = '2333' where name ='Testï¿½o'";
+		String ver = "select * from Adoptions";
+		String update="drop table Users";
+		
+		
+		
+		
+		String createUsers ="create table Adoptions ("
+				+"adp_id int not null generated always as identity (start with 0, increment by 1),"
+				+"guardian varchar(32) not null,"
+				+"animal int not null,"
+				+"CONSTRAINT adp_pk PRIMARY KEY (adp_id),"
+				+"CONSTRAINT adpU_fk FOREIGN KEY (guardian) REFERENCES Users(login),"
+				+"CONSTRAINT adpA_fk FOREIGN KEY (animal) REFERENCES Animals(animal_id)"
+				+")";
+ 
+		
 		
 		ConnectionDb db = new ConnectionDb();
-		
 		
 		String insert = "insert into teste123(name,passwd) values('Joï¿½o', '123456')";
 		String table = "teste123";
 		try {
-			db.createTable(create, ver);
-			//db.insertTable(insert, ver);
-			db.getAllTable(table, 3);
+			db.createTable(createUsers, ver);
+			//db.getAllTable(table, 3);
 			//db.deleteTable(table,"name", "Joï¿½o");
-			db.updateTable(update, ver);
-			db.getAllTable(table, 3);
+			//db.updateTable(update, ver);
+			//db.getAllTable(table, 3);
 			db.closeDB();
 		
 		} catch (SQLException e) {

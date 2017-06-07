@@ -11,6 +11,14 @@ public class Animal {
 	private int idade; //idade do animal
 	private boolean vacinacao; //completamento vacinado ou nao
 	private User responsavel; //ong ou usuario responsavel pela adocao
+	private String descricao; // uma descrição básica do animal
+	
+	
+	
+	
+
+	
+	
 	
 	
 }
