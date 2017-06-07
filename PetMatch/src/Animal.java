@@ -163,8 +163,79 @@ public class Animal {
 	}
 	
 
+	public String getDescricao() {
+		return descricao;
+	}
+
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+	
+	
+	public void printAnimal(){
+		
+		//como imprimir a foto?
+		
+		System.out.print("Tipo: " + tipo + "\n");
+		
+		System.out.print("Nome: " + nome+ "\n");
+		
+		System.out.print("Sexo: " + sexo+ "\n");
+		
+		System.out.print("Status: ");
+		
+		if(status) System.out.print("adotado" + "\n");
+		else System.out.print("disponivel para adocao" + "\n");
+		
+		System.out.print("Porte: " + porte + "\n");
+		
+		System.out.print("Pelagem: " + pelagem + "\n");
+		
+		System.out.print("Temperamento: " + temperamento + "\n");
+		
+		System.out.print("Idade: " + idade + " anos\n");
+		
+		if(vacinacao) System.out.print("Animal completamente vacinado\n");
+		else System.out.print("Animal nao esta completamente vacinado. Tratar com o Reponsavel\n");
+		
+		if (responsavel.getType() == 0){
+			Ong ong = (Ong) responsavel;
+			ong.printOng();
+		}
+		else{ 
+			Guardian guardian = (Guardian) responsavel;
+			guardian.printGuardian();
+		}
+		
+		System.out.println("Descricao do Animal:");
+		System.out.println(descricao);
+		
+	}
+
+
+	
 	
 	
 	
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

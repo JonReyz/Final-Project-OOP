@@ -2,6 +2,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Ong extends User{
+	private String name;
 	private String email;
 	private String adress;
 	private String phone;
@@ -149,16 +150,121 @@ public class Ong extends User{
 		
 	}	
 	
-	public void cadastrarNovoAnimal() throws IOException{
-		Animal a = new Animal(this); //funcionaria atribuir um tipo Ong para uma variavel User?
-		this.cadastrados.add(a);
+	
+	
+	public void printAnimaisCadastrados(){
+		for(int i =0 ; i < cadastrados.size(); i++){
+			//imprimir os dados do animal
+			System.out.print(i + ": ");
+			cadastrados.get(i).printAnimal();
+			
+			
+			
+			
+		}
+	}
+	
+	public void printOng(){
+		System.out.print("Nome da ONG: " + name + "\n");
+		
+		System.out.print("Email: " + email + "\n");
+		
+		System.out.print("Endereco: " + adress + "\n");
+		
+		System.out.print("Telefone: " + phone + "\n");
+		
+		System.out.print("CNPJ: " + cnpj + "\n" );
+		
+		System.out.print("Descricao da ONG:\n" + description + "\n");
 		
 	}
 	
+	public void apagaAnimalCadastrado(int id){
+		cadastrados.remove(id);
+	}
 	
+	public void addAnimalCadastrado(Animal a){
+		cadastrados.add(a);
+	}
+	
+	
+	public void atualizaAnimalCadastrado(int id) throws IOException{
+		System.out.println("Digite o numero da informacao que deseja atualizar, ou -1 para sair");
+		System.out.print("0 - tipo;\n1 - nome;\n2 - sexo;\n3 - status;\n4 - porte;\n5 - pelagem;\n6 - temperamento;\n7 - idade;\n8 - vacinacao;\n9 - responsavel;\n10 - descricao.\n");
+		int op = EntradaTeclado.leInt();
+		while(op != -1){
+			System.out.println("Digite a informacao atualizada");
+			switch(op){
+				case 0:
+					cadastrados.get(id).setTipo(EntradaTeclado.leString());
+					break;
+				case 1:
+					cadastrados.get(id).setNome(EntradaTeclado.leString());
+					break;
+				case 2:
+					cadastrados.get(id).setSexo(EntradaTeclado.leString());
+					break;
+				case 3:
+					String aux = EntradaTeclado.leString();
+					if(aux.equalsIgnoreCase("adotado")) cadastrados.get(id).setStatus(true);
+					else cadastrados.get(id).setStatus(false);
+					break;
+				case 4:
+					cadastrados.get(id).setPorte(EntradaTeclado.leString());
+					break;
+				case 5:
+					cadastrados.get(id).setPelagem(EntradaTeclado.leString());
+					break;
+				case 6:
+					cadastrados.get(id).setTemperamento(EntradaTeclado.leString());
+					break;
+				case 7:
+					cadastrados.get(id).setIdade(EntradaTeclado.leInt());
+					break;
+				case 8:
+					String aux2 = EntradaTeclado.leString();
+					if(aux2.equalsIgnoreCase("vacinado"))cadastrados.get(id).setVacinacao(true);
+					else cadastrados.get(id).setVacinacao(false);
+					break;
+				//nao existe case para mudar o responsavel, se for o caso, descadastramos o animal
+				case 9:
+					System.out.println("Essa escolha nao te permite designar um novo responsavel para o Animal.\n Ela apagara os dados do animal do sistema.");
+					System.out.println("Se deseja continuar digite 9 novamente, caso contrario, digite outra opcao do menu.");
+					op = EntradaTeclado.leInt();
+					if(op == 9){
+						cadastrados.remove(id); //remover tb do banco de dados
+					}
+					
+					
+					break;
+				case 10:
+					cadastrados.get(id).setDescricao(EntradaTeclado.leString());
+					break;
+					
+			}
+			System.out.println("Digite o numero da informacao que deseja atualizar, ou -1 para sair");
+			System.out.print("0 - tipo;\n1 - nome;\n2 - sexo;\n3 - status;\n4 - porte;\n5 - pelagem;\n6 - temperamento;\n7 - idade;\n8 - vacinacao;\n9 - responsavel;\n10 - descricao.\n");
+			op = EntradaTeclado.leInt();
+			
+			
+		}
+	
+	}
 	
 
 }
+
+//private String tipo; //gato ou cao ou...?
+//private String nome; //nome do animal
+//private String sexo; //femea ou macho 
+//private boolean status; //adotado ou nao
+//private String porte; //pequeno, medio ou grande
+//private String pelagem; //curto, medio ou longo
+//private String temperamento; //amigavel, timido
+//private int idade; //idade do animal
+//private boolean vacinacao; //completamento vacinado ou nao
+//private User responsavel; //ong ou usuario responsavel pela adocao
+//private String descricao; // uma descri��o b�sica do animal
 
 
 
