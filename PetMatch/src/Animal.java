@@ -1,3 +1,4 @@
+import java.io.IOException;
 
 public class Animal {
 	//foto do cachorro
@@ -11,10 +12,155 @@ public class Animal {
 	private int idade; //idade do animal
 	private boolean vacinacao; //completamento vacinado ou nao
 	private User responsavel; //ong ou usuario responsavel pela adocao
-	private String descricao; // uma descrição básica do animal
+	private String descricao; // uma descriï¿½ï¿½o bï¿½sica do animal
 	
-	
-	
+	/**
+	 * Construtor do objeto tipo Animal dado o usuario responsavel por gerenciar a adocao deste animal
+	 * @param u - dados do usuario responsavel pelo animal
+	 * @throws IOException
+	 */
+	public Animal(User u) throws IOException{
+		
+		String aux;
+		
+		System.out.println("Digite as caracteristicas do animal que deseja cadastrar.");
+		
+		System.out.println("Tipo do animal (gato, cao)");
+		tipo = EntradaTeclado.leString();
+		
+		System.out.println("Nome do animal");
+		nome = EntradaTeclado.leString();
+		
+		System.out.println("Sexo do animal");
+		sexo = EntradaTeclado.leString();
+		
+		status = false; //setar o status do animal para false (n adotado)
+		
+		System.out.println("Porte do animal (pequeno, medio ou grande)");
+		porte = EntradaTeclado.leString();
+		
+		System.out.println("Descreva a pelagem do animal (pelo curto, longo...)");
+		pelagem = EntradaTeclado.leString();
+		
+		System.out.println("Descreva o temperamento do animal (amigavel, timido, ativo...)");
+		temperamento = EntradaTeclado.leString();
+		
+		System.out.println("Qual a idade do animal?");
+		idade = EntradaTeclado.leInt();
+		
+		System.out.println("O animal esta COMPLETAMENTE vacinado? (digite sim ou nao)");
+		aux = EntradaTeclado.leString();
+		
+		if(aux.equals("sim")) vacinacao = true;
+		else vacinacao = false;
+		
+		responsavel = u;
+		
+		System.out.println("Digite uma breve descricao com informacoes adicionais sobre o animal que podem ser importantes");
+		descricao = EntradaTeclado.leString();
+		
+		
+	}
+
+
+	public String getTipo() {
+		return tipo;
+	}
+
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+
+	public String getNome() {
+		return nome;
+	}
+
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+
+	public String getSexo() {
+		return sexo;
+	}
+
+
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
+	}
+
+
+	public boolean isStatus() {
+		return status;
+	}
+
+
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+
+
+	public String getPorte() {
+		return porte;
+	}
+
+
+	public void setPorte(String porte) {
+		this.porte = porte;
+	}
+
+
+	public String getPelagem() {
+		return pelagem;
+	}
+
+
+	public void setPelagem(String pelagem) {
+		this.pelagem = pelagem;
+	}
+
+
+	public String getTemperamento() {
+		return temperamento;
+	}
+
+
+	public void setTemperamento(String temperamento) {
+		this.temperamento = temperamento;
+	}
+
+
+	public int getIdade() {
+		return idade;
+	}
+
+
+	public void setIdade(int idade) {
+		this.idade = idade;
+	}
+
+
+	public boolean isVacinacao() {
+		return vacinacao;
+	}
+
+
+	public void setVacinacao(boolean vacinacao) {
+		this.vacinacao = vacinacao;
+	}
+
+
+	public User getResponsavel() {
+		return responsavel;
+	}
+
+
+	public void setResponsavel(User responsavel) {
+		this.responsavel = responsavel;
+	}
 	
 
 	
