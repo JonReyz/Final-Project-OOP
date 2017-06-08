@@ -1,3 +1,4 @@
+
 import java.io.IOException;
 
 public class Animal {
@@ -172,32 +173,34 @@ public class Animal {
 		this.descricao = descricao;
 	}
 	
-	
+	/**
+	 * Imprime os dados de um animal
+	 */
 	public void printAnimal(){
 		
 		//como imprimir a foto?
 		
-		System.out.print("Tipo: " + tipo + "\n");
+		System.out.print("\tTipo: " + tipo + "\n");
 		
-		System.out.print("Nome: " + nome+ "\n");
+		System.out.print("\tNome: " + nome+ "\n");
 		
-		System.out.print("Sexo: " + sexo+ "\n");
+		System.out.print("\tSexo: " + sexo+ "\n");
 		
-		System.out.print("Status: ");
+		System.out.print("\tStatus: ");
 		
-		if(status) System.out.print("adotado" + "\n");
-		else System.out.print("disponivel para adocao" + "\n");
+		if(status) System.out.print("\tadotado" + "\n");
+		else System.out.print("\tdisponivel para adocao" + "\n");
 		
-		System.out.print("Porte: " + porte + "\n");
+		System.out.print("\tPorte: " + porte + "\n");
 		
-		System.out.print("Pelagem: " + pelagem + "\n");
+		System.out.print("\tPelagem: " + pelagem + "\n");
 		
-		System.out.print("Temperamento: " + temperamento + "\n");
+		System.out.print("\tTemperamento: " + temperamento + "\n");
 		
-		System.out.print("Idade: " + idade + " anos\n");
+		System.out.print("\tIdade: " + idade + " anos\n");
 		
-		if(vacinacao) System.out.print("Animal completamente vacinado\n");
-		else System.out.print("Animal nao esta completamente vacinado. Tratar com o Reponsavel\n");
+		if(vacinacao) System.out.print("\tAnimal completamente vacinado\n");
+		else System.out.print("\tAnimal nao esta completamente vacinado. Tratar com o Reponsavel\n");
 		
 		if (responsavel.getType() == 0){
 			Ong ong = (Ong) responsavel;
@@ -208,34 +211,8 @@ public class Animal {
 			guardian.printGuardian();
 		}
 		
-		System.out.println("Descricao do Animal:");
-		System.out.println(descricao);
+		System.out.println("\tDescricao do Animal:");
+		System.out.println("\t\t" + descricao);
 		
 	}
-
-
-	
-	
-	
-	
-	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

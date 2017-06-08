@@ -1,3 +1,5 @@
+
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -52,7 +54,9 @@ public class Guardian extends User {
 		this.interest_list = interest_list;
 	}
 	
-	
+	/**
+	 * Imprime dados de um usuario tipo Guardian
+	 */
 	public void printGuardian(){
 		System.out.print("Nome: " + name + "\n");
 		
@@ -61,17 +65,28 @@ public class Guardian extends User {
 	
 	//----------metodos para a lista de interesses------------------------
 	
+	/**
+	 * Imprime a lista de animais interessantes
+	 */
 	public void printAnimaisInteressantes(){
 		for(int i = 0; i < interest_list.size(); i++){
-			System.out.print(i + ": ");
+			System.out.print(i + ":\n");
 			interest_list.get(i).printAnimal();
 		}
 	}
 	
+	/**
+	 * Apaga os dados de um animal da lista de interesses
+	 * @param id - indice do animal a ser removido da lista
+	 */
 	public void apagaAnimalInteressante(int id){
 		interest_list.remove(id);
 	}
 	
+	/**
+	 * Adiciona um novo animal a lista de interesse
+	 * @param a - dados do animal a ser adiocionado
+	 */
 	public void addAnimalInteressante(Animal a){
 		interest_list.add(a);
 	}
@@ -81,23 +96,38 @@ public class Guardian extends User {
 	
 	//---------metodos para a lista de animais cadastrados----------------
 	
+	/**
+	 * Imprime a lista de animais cadastrados pelo usuario
+	 */
 	public void printAnimaisCadastrados(){
 		for(int i =0 ; i < cadastrados.size(); i++){
 			//imprimir os dados do animal
-			System.out.print(i + ": ");
+			System.out.print(i + ":\n");
 			cadastrados.get(i).printAnimal();
 		}
 	}
 	
+	/**
+	 * Apaga os dados de um animal da lista de cadastros
+	 * @param id - indice do animal a ser removido da lista
+	 */
 	public void apagaAnimalCadastrado(int id){
 		cadastrados.remove(id);
 	}
 	
+	/**
+	 * Adiciona informacoes de um novo animal na lista de animais cadastrados
+	 * @param a - info do novo animal
+	 */
 	public void addAnimalCadastrado(Animal a){
 		cadastrados.add(a);
 	}
 	
-	
+	/**
+	 * atualiza informacoes de um animal cadastrado
+	 * @param id - indice do animal a ser modificado
+	 * @throws IOException
+	 */
 	public void atualizaAnimalCadastrado(int id) throws IOException{
 		System.out.println("Digite o numero da informacao que deseja atualizar, ou -1 para sair");
 		System.out.print("0 - tipo;\n1 - nome;\n2 - sexo;\n3 - status;\n4 - porte;\n5 - pelagem;\n6 - temperamento;\n7 - idade;\n8 - vacinacao;\n9 - responsavel;\n10 - descricao.\n");
@@ -166,4 +196,3 @@ public class Guardian extends User {
 	
 	
 }
-
