@@ -80,6 +80,32 @@ body, html {
     cursor: pointer;
 }
 
+.picDiv {
+    object-fit: cover; 
+    width: auto;
+    height: auto;
+    margin: 20px 10px 20px 10px;
+}
+
+.picDiv > .pic {
+    border-radius: 50%;
+    overflow: hidden;
+    object-fit: cover; 
+    width: 100%;
+    height: auto;
+}
+
+.menuHidden > .pic {
+    border-radius: 50%;
+    overflow: hidden;
+    object-fit: cover; 
+    width: 50px;
+    height: 100px;
+    display: block;
+    margin: 0;
+    display: none;
+}
+
 .popShow{
 position:absolute; 
 opacity: 1;
@@ -103,7 +129,7 @@ visibility: visible;
 .popShow>.card>.img-circle{
 	margin-top: 25px;
 	margin-bottom: 25px;
-	cursor: pointer;
+	cursor: default;
 }
 
 .popHide{
@@ -129,6 +155,48 @@ visibility: visible;}
 	margin-bottom: 25px;
 	cursor: pointer;
 }
+
+.menuItem{
+    transition: 0.3s;
+    opacity: 1;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    color: #484848;
+    font-size: 25px;
+    overflow: hidden;
+    padding-right: 40px;
+}
+
+.menuShown > .menuItem > .menuItemIcon {
+    transition: 0.3s;
+    display: inline-block; 
+    float: left; 
+    background: url(icones/out.png) no-repeat; 
+    background-size:contain; 
+    width: 20%;
+    height: 25px;
+    margin-left: 10px;
+}
+
+.menuShown > .menuItem > .menuItemText {
+    display: inline-block;
+}
+
+.menuItem:hover{
+    transition: 0.3s;
+    color: #d3d3d3;
+    background-color: #004d66;
+    padding-right: 30px;
+}
+
+.menuHidden > .menuItem{
+    opacity: 0;
+    transition: 0.3s;
+}
+
+
 
 </style>
 
@@ -175,6 +243,13 @@ function popUp(name, size, weight, src) {
 		<div id = "tst" onclick="myFunction()">
    			<input class="myButton" type="submit" value="">
 		</div>
+                <div class="picDiv">
+                    <img class="pic" src='icones/noprofile.png'>
+                </div>
+            <div class='menuItem'><div class="menuItemIcon"></div><div class="menuItemText">Setting</div></div>
+            <div class='menuItem'><div class="menuItemIcon"></div><div class="menuItemText">Perfil</div></div>
+            <div class='menuItem'><div class="menuItemIcon"></div><div class="menuItemText">Filtros</div></div>
+            <div class='menuItem'><div class="menuItemIcon"></div><div class="menuItemText">Log out</div></div>
 	</div>
 
 	<div style="width: 100%; height: 100%; float:right; background-color: black; margin: auto;">
