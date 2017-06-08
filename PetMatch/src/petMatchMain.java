@@ -1,3 +1,4 @@
+
 import java.io.IOException;
 
 
@@ -34,7 +35,7 @@ public class petMatchMain {
 			
 			
 			
-			
+			user.printAnimaisCadastrados();
 			System.out.println("Para atualizar as informacoes sobre um animal digite 0;");
 			System.out.println("Para apagar as informacoes sobre um animal digite 1;");
 			System.out.println("Para cadastrar as informacoes sobre um novo animal digite 2;");
@@ -129,19 +130,20 @@ public class petMatchMain {
 		
 		//Autenticao dos dados retorna um objeto User
 		
+		//obtencao do tipo sem o login efetivo
+		int t = EntradaTeclado.leInt();
+		//User u = new User();
 		
-		
-		User u = new User();
-		
-		if(u.getType() == 0){ //se for ONG
-			
-				printMenuOng((Ong)u);
+		if(t == 0){ //se for ONG
+				Ong ong = new Ong();
+				printMenuOng(ong);
 			
 		}
 		
 		else{ //se for pessoa fisica
-			
-				printMenuGuardianMain((Guardian)u);
+				Guardian g = new Guardian();
+				
+				printMenuGuardianMain(g);
 			
 		}
 		

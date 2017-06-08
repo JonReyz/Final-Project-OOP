@@ -1,3 +1,5 @@
+
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -16,7 +18,8 @@ public class Ong extends User{
 		super();
 		String aux;
 		
-		
+		System.out.println("Digite o nome da sua ONG.");
+		name = EntradaTeclado.leString();
 		
 		System.out.println("Digite o email para contato com a ONG.");
 		email = EntradaTeclado.leString();
@@ -30,10 +33,10 @@ public class Ong extends User{
 		System.out.println("Digite o CNPJ da ONG");
 		aux = EntradaTeclado.leString();
 		
-		while(!verificaCnpj(aux)){
-			System.out.println("CNPJ invalido, por favor, digite novamente");
-			aux = EntradaTeclado.leString();
-		}
+//		while(!verificaCnpj(aux)){
+//			System.out.println("CNPJ invalido, por favor, digite novamente");
+//			aux = EntradaTeclado.leString();
+//		}
 		cnpj = aux;
 		
 		System.out.println("Digite uma breve descricao da ONG");
@@ -92,6 +95,12 @@ public class Ong extends User{
 		this.cadastrados = cadastrados;
 	}
 
+	/**
+	 * Verifica a validacao de um cnpj sem caracteres especiais (apenas numeros)
+	 * @param cnpj - string contendo os caracteres do cnpj
+	 * @return true - se for valido
+	 * 		   false - se for invalido
+	 */
 	public boolean verificaCnpj(String cnpj){
 		int[] vet = {5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2};
 		int sum = 0;
@@ -151,11 +160,13 @@ public class Ong extends User{
 	}	
 	
 	
-	
+	/**
+	 * Imprime a lista de animais cadastrados pelo usuario
+	 */
 	public void printAnimaisCadastrados(){
 		for(int i =0 ; i < cadastrados.size(); i++){
 			//imprimir os dados do animal
-			System.out.print(i + ": ");
+			System.out.print(i + ":\n");
 			cadastrados.get(i).printAnimal();
 			
 			
@@ -163,7 +174,9 @@ public class Ong extends User{
 			
 		}
 	}
-	
+	/**
+	 * Imprime os dados de uma ONG
+	 */
 	public void printOng(){
 		System.out.print("Nome da ONG: " + name + "\n");
 		
@@ -179,14 +192,28 @@ public class Ong extends User{
 		
 	}
 	
+	/**
+	 * Apaga os dados de um animal da lista de cadastros
+	 * @param id - indice do animal a ser removido da lista
+	 */
 	public void apagaAnimalCadastrado(int id){
 		cadastrados.remove(id);
 	}
 	
+	/**
+	 * Adiciona informacoes de um novo animal na lista de animais cadastrados
+	 * @param a - info do novo animal
+	 */
 	public void addAnimalCadastrado(Animal a){
 		cadastrados.add(a);
 	}
 	
+	
+	/**
+	 * atualiza informacoes de um animal cadastrado
+	 * @param id - indice do animal a ser modificado
+	 * @throws IOException
+	 */
 	
 	public void atualizaAnimalCadastrado(int id) throws IOException{
 		System.out.println("Digite o numero da informacao que deseja atualizar, ou -1 para sair");
@@ -265,6 +292,7 @@ public class Ong extends User{
 //private boolean vacinacao; //completamento vacinado ou nao
 //private User responsavel; //ong ou usuario responsavel pela adocao
 //private String descricao; // uma descri��o b�sica do animal
+
 
 
 
