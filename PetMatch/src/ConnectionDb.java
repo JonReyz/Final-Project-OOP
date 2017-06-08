@@ -155,9 +155,15 @@ public class ConnectionDb {
 	public static void main(String[] args) {
 		
 		String create = "create table teste123 (id int not null generated always as identity constraint use_pk primary key, name varchar(30) not null, passwd varchar(30) not null)";
-		String ver = "select * from Adoptions";
+		String ver = "select * from Guardians";
 		String update="drop table Users";
 		
+		String insert1 = "insert into Users(login,passwd,type) values('admin','admin',0)";
+		String insert2 = "insert into Users(login,passwd,type) values('ong','ong',1)";
+		
+		String insert3 = "insert into Guardians(name,email,login) values('Teste de cliente','teste@cliente.com',(select login from Users where login='admin'))";
+		String insert4 = "insert into Ongs(email,adress,phone,cnpj,description,login) values('Ong@email','Rua da ong','32419262','123123123','Uma ong legal',(select login from Users where login='ong'))";
+		String insert5 = "insert into Animals(name,tipo,sexo,status,porte,pelagem, temperamento,email,idade,vacinacao,responsavel,description) values('Pillow','Gato','F','0','Pequena','Curto','Dócil','asd@asd',3,'0',(select login from Users where login='ong'),'Uma gatinha fofa')";
 		
 		
 		
@@ -177,11 +183,11 @@ public class ConnectionDb {
 		String insert = "insert into teste123(name,passwd) values('Joï¿½o', '123456')";
 		String table = "teste123";
 		try {
-			db.createTable(createUsers, ver);
+			//db.createTable(createUsers, ver);
 			//db.getAllTable(table, 3);
 			//db.deleteTable(table,"name", "Joï¿½o");
-			//db.updateTable(update, ver);
-			//db.getAllTable(table, 3);
+			//db.insertTable(insert5, ver);
+			db.getAllTable("Animals", 13);
 			db.closeDB();
 		
 		} catch (SQLException e) {

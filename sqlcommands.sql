@@ -71,6 +71,8 @@ foreign key (animal) references Animals(animal_id),
 +"CONSTRAINT guardians_fk FOREIGN KEY (login) REFERENCES Users(login)"
 +")";
 
+/*---------------------------------------Inserções no banco de dados --------------------------------------------------------------------------------*/
+/*---------------------------------- Arrumar a tabela animais-----------------------------------------------------------------*/
 
 
 "create table Animals ("
@@ -110,3 +112,29 @@ foreign key (animal) references Animals(animal_id),
 +"CONSTRAINT adpU_fk FOREIGN KEY (guardian) REFERENCES Users(login),"
 +"CONSTRAINT adpA_fk FOREIGN KEY (animal) REFERENCES Animals(animal_id)"
 +")";
+
+
+/*---------------------------------------Inserções no banco de dados --------------------------------------------------------------------------------*/
+
+insert into Users(login,passwd,type) values('admin','admin',0);
+insert into Users(login,passwd,type) values('ong','ong',1);
+insert into Guardians(name,email,login) values('Teste de cliente','teste@cliente.com',(select login from Users where login='admin'));
+insert into Ongs(email,adress,phone,cnpj,description,login) values('Ong@email','Rua da ong','32419262','123123123','Uma ong legal',(select login from Users where login='ong'));
+insert into Animals(name,tipo,sexo,status,porte,pelagem, temperamento,email,idade,vacinacao,responsavel,description) values('Obitinho','Cão','M',0,'pequeno','pequeno','dócil','asd@asd',10,0,(select login from Users where login='ong'),'heeey');
+
+
+
+insert into Animals(name,tipo,sexo,status,porte,pelagem, temperamento,email,idade,vacinacao,responsavel,description) values('Obitão','Cão','M','0','Grande','Grande','Brabo','asd@asd',3,'0',(select login from Users where login='ong'),'heeey')
+
+
+
+
+
+
+
+
+
+
+
+
+
