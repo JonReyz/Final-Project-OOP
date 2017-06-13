@@ -10,6 +10,8 @@ public class Ong extends User{
 	private String cnpj;
 	private String description;
 	private ArrayList<Animal> cadastrados;
+	//Vetor usado para a validacao do CNPJ
+	private static final int[] pesoCNPJ = {6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2};
 
 	
 	public Ong() throws IOException{
@@ -32,10 +34,10 @@ public class Ong extends User{
 		System.out.println("Digite o CNPJ da ONG");
 		aux = EntradaTeclado.leString();
 		
-//		while(!verificaCnpj(aux)){
-//			System.out.println("CNPJ invalido, por favor, digite novamente");
-//			aux = EntradaTeclado.leString();
-//		}
+		while(!verificaCnpj(aux)){
+			System.out.println("CNPJ invalido, por favor, digite novamente");
+			aux = EntradaTeclado.leString();
+		}
 		cnpj = aux;
 		
 		System.out.println("Digite uma breve descricao da ONG");
@@ -100,62 +102,25 @@ public class Ong extends User{
 	 * @return true - se for valido
 	 * 		   false - se for invalido
 	 */
-	public boolean verificaCnpj(String cnpj){
-		int[] vet = {5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2};
-		int sum = 0;
-		int r = 0;
-		int verf1 = cnpj.charAt(12) - '0';
-		int verf2 = cnpj.charAt(13) - '0';
-		int aux = 0;
+	private static int calcularDigito(String str, int[] peso) {
+		int soma = 0;
+	     
+		for (int indice=str.length()-1, digito; indice >= 0; indice-- ) {
+			digito = Integer.parseInt(str.substring(indice,indice+1));
+	        soma += digito*peso[peso.length-str.length()+indice];
+	    }
+	    soma = 11 - soma % 11;
+	    return soma > 9 ? 0 : soma;
+	}
 		
-		
-		
-		//multiplicacao dos elementos do vetor pelo numero do cnpj
-		for(int i = 0; i < vet.length; i++){
-				vet[i] = vet[i] * (cnpj.charAt(i) - '0'); //transformando para inteiro
-				
-		}
-		
-		//soma dos elementos dos vetor
-		for(int i = 0; i < vet.length; i++){
-			sum = sum + vet[i];
-		}
-		
-		r = sum % 11;
-		
-		if(r < 2) aux = 0;
-		else{
-			aux = 11 - r;
+	public static boolean isValidCNPJ(String cnpj) {
+	   
+		if ((cnpj==null)||(cnpj.length()!=14)) return false;
 			
-		}
-		if(aux != verf1) return false;
-		else{
-			int[] vet2 = {6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2};
-			
-			for(int i = 0; i < vet2.length; i++){
-				vet2[i] = vet2[i] * (cnpj.charAt(i) - '0');
-				
-			}
-			
-			for(int i = 0; i < vet2.length; i++){
-				sum = sum + vet2[i];
-			}
-			r = sum % 11;
-			
-			if(r < 2) aux = 0;
-			else aux = 11 - r;
-			
-			return (aux == verf2);
-			
-
-			
-			
-		}
+	    Integer digito1 = calcularDigito(cnpj.substring(0,12), pesoCNPJ);
+		Integer digito2 = calcularDigito(cnpj.substring(0,12) + digito1, pesoCNPJ);
 		
-		
-		
-		
-		
+		return cnpj.equals(cnpj.substring(0,12) + digito1.toString() + digito2.toString());
 	}	
 	
 	
@@ -167,10 +132,6 @@ public class Ong extends User{
 			//imprimir os dados do animal
 			System.out.print(i + ":\n");
 			cadastrados.get(i).printAnimal();
-			
-			
-			
-			
 		}
 	}
 	/**

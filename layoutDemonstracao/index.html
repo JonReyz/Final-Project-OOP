@@ -59,6 +59,20 @@ body, html {
     border:none;
 }
 
+.closeButton{
+    background:url(icones/xxx.png) no-repeat;
+    background-size:contain;
+    cursor:pointer;
+    border:none;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 5px;
+    float: right;
+    width: 30px;
+    height: 30px;
+    transition: all 0.2s ease 0s;
+}
+
 .card{
 	display: inline-block;
 	width: 20%;
@@ -68,6 +82,7 @@ body, html {
 	margin-right: 25px;
 	margin-left: 25px;
 	margin-bottom: 10px;
+
 }
 
 .img-circle {
@@ -173,7 +188,6 @@ visibility: visible;}
     transition: 0.3s;
     display: inline-block; 
     float: left; 
-    background: url(icones/out.png) no-repeat; 
     background-size:contain; 
     width: 20%;
     height: 25px;
@@ -246,7 +260,6 @@ function popUp(name, size, weight, src) {
                 <div class="picDiv">
                     <img class="pic" src='icones/noprofile.png'>
                 </div>
-            <div class='menuItem'><div class="menuItemIcon"></div><div class="menuItemText">Setting</div></div>
             <div class='menuItem'><div class="menuItemIcon"></div><div class="menuItemText">Perfil</div></div>
             <div class='menuItem'><div class="menuItemIcon"></div><div class="menuItemText">Filtros</div></div>
             <div class='menuItem'><div class="menuItemIcon"></div><div class="menuItemText">Log out</div></div>
@@ -286,7 +299,7 @@ function popUp(name, size, weight, src) {
 		
 		<div class="popHide" id="pop" style="display: none">
 		<div style="background-color: #00004d;  width: 100%; height: 35px; display:block;">
-   			<input class="myButton" type="submit" value="" onclick = "popUp('-1')">
+   			<input class="closeButton" type="submit" value="" onclick = "popUp('-1')">
 		</div>
 			<div class="card">
 				<img id="img" class="img-circle">
