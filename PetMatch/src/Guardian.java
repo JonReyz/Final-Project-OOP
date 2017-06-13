@@ -21,6 +21,14 @@ public class Guardian extends User {
 		cadastrados = new ArrayList<Animal>();
 		
 	}
+	
+	public Guardian(User u, String n, String e) {
+		super(u.getLogin(),u.getPasswd(),u.getType());
+		name = n;
+		email= e;
+		interest_list = new ArrayList<Animal>();
+		cadastrados = new ArrayList<Animal>();
+	}
 
 	public ArrayList<Animal> getCadastrados() {
 		return cadastrados;

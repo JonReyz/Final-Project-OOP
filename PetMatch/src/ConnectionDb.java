@@ -159,6 +159,28 @@ public class ConnectionDb {
 		return user;
 	}
 	
+	public static Guardian getGuardianDB(User u) throws SQLException{
+		Statement s;
+		String sql = "select * from Guardians where login='" + u.getLogin() +"'";
+		System.out.println(sql);
+		Guardian guardian = null;
+		try {
+			s = con.createStatement();
+			ResultSet result = s.executeQuery(sql);
+			result.next();
+			guardian = new Guardian(u,result.getString(1),result.getString(2));
+			result.close();	
+			s.close();	
+			
+		} catch (SQLException e) {
+			System.out.println("Erro ao obter usuário");
+			con.close();
+			e.printStackTrace();
+		}
+		
+		return guardian;
+	}
+		
 	
 	/**
 	 * Funï¿½ï¿½o para fechar a conexï¿½o com o banco de dados

@@ -156,15 +156,15 @@ public class petMatchMain {
 			user = verificationLogin(login,senha);
 			if(user == null) System.out.println("Usuário ou senha incorreta");
 		}
-		if(t == 0){ //se for ONG
+		if(user.getType() == 1){ //se for ONG
 				Ong ong = new Ong();
 				printMenuOng(ong);
 			
 		}
 		
 		else{ //se for pessoa fisica
-				Guardian g = new Guardian();
-				
+				Guardian g = ConnectionDb.getGuardianDB(user);
+				System.out.println("Email : "+ g.getLogin());
 				printMenuGuardianMain(g);
 			
 		}
