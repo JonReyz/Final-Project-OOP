@@ -61,6 +61,7 @@ public class User {
 		
 		String sql = "insert into Users(name,passwd,type) values('"+this.login+"','" + this.passwd +"','"+this.type+"')";
 		String ver = "select * from Users";
+		// a considerar
 		ConnectionDb.ConnectWithDatabase();
 		//talvez fazer uma verificação melhor
 		try {

@@ -137,19 +137,22 @@ public class ConnectionDb {
 		
 	}
 	
-	public static User getUserDB(String name){
+	public static User getUserDB(String name) throws SQLException{
 		Statement s;
-		String sql = "select * from Users where login=" +name+")";
+		String sql = "select * from Users where login='" + name +"'";
+		System.out.println(sql);
 		User user = null;
 		try {
 			s = con.createStatement();
 			ResultSet result = s.executeQuery(sql);
+			result.next();
 			user = new User(result.getString(1),result.getString(2),Integer.parseInt(result.getString(3)));
-			result.close();
-			s.close();
+			result.close();	
+			s.close();	
 			
 		} catch (SQLException e) {
 			System.out.println("Erro ao obter usuário");
+			con.close();
 			e.printStackTrace();
 		}
 		
@@ -228,6 +231,8 @@ public class ConnectionDb {
 		
 		ConnectionDb db = new ConnectionDb();
 		
+		//db.closeDB();
+		
 		String insert = "insert into teste123(name,passwd) values('Joï¿½o', '123456')";
 		String table = "teste123";
 		try {
@@ -235,7 +240,7 @@ public class ConnectionDb {
 			//db.getAllTable(table, 3);
 			//db.deleteTable(table,"name", "Joï¿½o");
 			//db.insertTable(insert5, ver);
-			db.getAllTable("Animals", 13);
+			//db.getAllTable("Animals", 13);
 			db.closeDB();
 		
 		} catch (SQLException e) {

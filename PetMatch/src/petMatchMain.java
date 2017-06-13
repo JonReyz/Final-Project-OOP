@@ -117,10 +117,12 @@ public class petMatchMain {
 	}
 	
 	//precisamos colocar isso em uma outra classe
-	public static User verificationLogin(String login, String passwd){
-		String sql = "select * from Users where login='"+login + "' and passwd = '"+ passwd+" ')";
+	public static User verificationLogin(String login, String passwd) throws SQLException{
+		String sql = "select * from Users where login='"+login + "' and passwd = '"+ passwd +" '";
+		System.out.println(sql);
 		User user;
 		if(ConnectionDb.sqlExists(sql)){
+			System.out.println("Usuário encontrado");
 			user = ConnectionDb.getUserDB(login);
 		}
 		else return null;
@@ -133,8 +135,8 @@ public class petMatchMain {
 		int t = 0;
 		//ConnectionDb.closeDB();
 		ConnectionDb.ConnectWithDatabase();
-		//ConnectionDb.getAllTable("Users", 3);
-		while(user == null){
+		ConnectionDb.getAllTable("Users", 3);
+		if (user == null){
 		
 			System.out.println("Digite seus dados");
 			System.out.print("Login: ");

@@ -34,7 +34,7 @@ public class Ong extends User{
 		System.out.println("Digite o CNPJ da ONG");
 		aux = EntradaTeclado.leString();
 		
-		while(!verificaCnpj(aux)){
+		while(!isValidCNPJ(aux)){
 			System.out.println("CNPJ invalido, por favor, digite novamente");
 			aux = EntradaTeclado.leString();
 		}
@@ -76,7 +76,7 @@ public class Ong extends User{
 	}
 
 	public void setCnpj(String cnpj) {
-		if(verificaCnpj(cnpj)) this.cnpj = cnpj;
+		if(isValidCNPJ(cnpj)) this.cnpj = cnpj;
 		else System.out.println("CNPJ invalido. Acao cancelada.");
 	}
 
