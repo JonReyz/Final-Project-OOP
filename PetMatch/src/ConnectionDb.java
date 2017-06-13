@@ -7,9 +7,9 @@
 import java.sql.*;
 public class ConnectionDb {
 	
-	String driver = "jdbc:derby:./Data/database;create=true";
-	Connection con;
-	boolean start = false;
+	static String driver = "jdbc:derby:./Data/database;create=true";
+	static Connection con;
+	static boolean start = false;
 	
 	/**
 	 * Construtor da classe, quando ï¿½ chamado cria a conexï¿½o com o banco de dados
@@ -26,19 +26,33 @@ public class ConnectionDb {
 		}
 	}
 	
+	
+	
+	
+	
+	public static void ConnectWithDatabase(){
+		try {
+			con = DriverManager.getConnection(driver);
+			System.out.println("Connected to database with sucess!!");
+			start = true;
+		} catch (SQLException e) {
+			System.out.println("Failed to connect with the database!!");
+			e.printStackTrace();
+		}
+	}
 	/**
 	 * Funï¿½ï¿½o que ï¿½ responsï¿½vel por criar uma tabela no banco de dados
 	 * @param sql Comando sql para a criaï¿½ï¿½o da tabela
 	 * @param sql2 Comando em sql usado para verificar se a tabela existe (select * from X)
 	 * @throws SQLException
 	 */
-	public void createTable(String sql,String sql2) throws SQLException{
+	public static void  createTable(String sql,String sql2) throws SQLException{
 		Statement s = con.createStatement();
 		//Se a tabela nï¿½o existe, ela ï¿½ criada
 		if(!ConnectionDb.tableExists(con,sql2)){
 			 System.out.println (" . . . . creating table");
              s.execute(sql);
-		}
+		} 
 		s.close();
 	}
 	
@@ -49,7 +63,7 @@ public class ConnectionDb {
 	 * @param sql2 (select * from X)
 	 * @throws SQLException
 	 */
-	public void insertTable(String sql, String sql2) throws SQLException{
+	public static void insertTable(String sql, String sql2) throws SQLException{
 		PreparedStatement psInsert;
 		if(ConnectionDb.tableExists(con,sql2)){
 			psInsert = con.prepareStatement(sql); 
@@ -65,7 +79,7 @@ public class ConnectionDb {
 	 * @param condition Recebe uma string com o campo onde a condiï¿½ï¿½o deve ser respeitada
 	 * @param name Identificador de qual registro deve ser apagado
 	 */
-	public void deleteTable(String table,String condition, String name){
+	public static void deleteTable(String table,String condition, String name){
 		String d = "DELETE FROM " + table + " WHERE " + condition + " = '" +  name + "'";
 		try {      
             PreparedStatement ps = con.prepareStatement(d);   
@@ -88,7 +102,7 @@ public class ConnectionDb {
 	 * @param sql2 Comando em sql para executar a verificaï¿½ï¿½o da existï¿½ncia de tabela (select * from X)
 	 * @throws SQLException
 	 */
-	public void updateTable(String sql, String sql2) throws SQLException{
+	public  static void updateTable(String sql, String sql2) throws SQLException{
 		PreparedStatement psInsert;
 		if(ConnectionDb.tableExists(con,sql2)){
 			psInsert = con.prepareStatement(sql); 
@@ -103,7 +117,7 @@ public class ConnectionDb {
 	 * @param table
 	 * @param fields
 	 */
-	public void getAllTable(String table, int fields){
+	public static void getAllTable(String table, int fields){
 		Statement s;
 		try {
 			s = con.createStatement();
@@ -123,11 +137,31 @@ public class ConnectionDb {
 		
 	}
 	
+	public static User getUserDB(String name){
+		Statement s;
+		String sql = "select * from Users where login=" +name+")";
+		User user = null;
+		try {
+			s = con.createStatement();
+			ResultSet result = s.executeQuery(sql);
+			user = new User(result.getString(1),result.getString(2),Integer.parseInt(result.getString(3)));
+			result.close();
+			s.close();
+			
+		} catch (SQLException e) {
+			System.out.println("Erro ao obter usuário");
+			e.printStackTrace();
+		}
+		
+		return user;
+	}
+	
+	
 	/**
 	 * Funï¿½ï¿½o para fechar a conexï¿½o com o banco de dados
 	 * @throws SQLException
 	 */
-	public void closeDB() throws SQLException{
+	public static void closeDB() throws SQLException{
 		con.close();
 		System.out.println("Closing the database...");
 	}
@@ -151,6 +185,20 @@ public class ConnectionDb {
 		}
 	}
 	
+	
+	public static boolean sqlExists(String sql){
+		try{
+			Statement s = con.createStatement();
+			s.execute(sql);
+			s.close();
+			System.out.println("Comando encontrado");
+			return true;
+		} catch (SQLException sqle){
+			String error = sqle.getSQLState();
+			System.out.println("Comando não existente...");
+			return false;
+		}
+	}
 	
 	public static void main(String[] args) {
 		

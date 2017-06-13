@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.sql.SQLException;
 
 
 public class petMatchMain {
@@ -115,24 +116,44 @@ public class petMatchMain {
 		
 	}
 	
-	public static void main(String[] args) throws IOException{
+	//precisamos colocar isso em uma outra classe
+	public static User verificationLogin(String login, String passwd){
+		String sql = "select * from Users where login='"+login + "' and passwd = '"+ passwd+" ')";
+		User user;
+		if(ConnectionDb.sqlExists(sql)){
+			user = ConnectionDb.getUserDB(login);
+		}
+		else return null;
 		
+		return user;
+	}
+	
+	public static void main(String[] args) throws IOException, SQLException{
+		User user = null;
+		int t = 0;
+		//ConnectionDb.closeDB();
+		ConnectionDb.ConnectWithDatabase();
+		//ConnectionDb.getAllTable("Users", 3);
+		while(user == null){
 		
-		System.out.println("Digite seus dados");
-		System.out.print("Login: ");
+			System.out.println("Digite seus dados");
+			System.out.print("Login: ");
 		
-		String login = EntradaTeclado.leString();
-		System.out.print('\n');
-		System.out.print("Senha: ");
-		String senha = EntradaTeclado.leString();
-		System.out.print('\n');
+			String login = EntradaTeclado.leString();
+			System.out.print('\n');
+			System.out.print("Senha: ");
+			String senha = EntradaTeclado.leString();
+			System.out.print('\n');
 		
-		//Autenticao dos dados retorna um objeto User
+			//Autenticao dos dados retorna um objeto User
 		
-		//obtencao do tipo sem o login efetivo
-		int t = EntradaTeclado.leInt();
-		//User u = new User();
+			//obtencao do tipo sem o login efetivo
+			// t = EntradaTeclado.leInt();
+			//User u = new User();
 		
+			user = verificationLogin(login,senha);
+			if(user == null) System.out.println("Usuário ou senha incorreta");
+		}
 		if(t == 0){ //se for ONG
 				Ong ong = new Ong();
 				printMenuOng(ong);
@@ -146,7 +167,7 @@ public class petMatchMain {
 			
 		}
 		
-		
+		ConnectionDb.closeDB();
 	}
-	
+
 }
