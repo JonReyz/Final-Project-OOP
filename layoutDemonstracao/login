@@ -1,0 +1,75 @@
+<html>
+
+<style>
+body{
+	background-color: black;
+}
+
+.screen{
+	height: 50%;
+	width: 100%;
+	text-align: center;
+	vertical-align: middle;
+	margin: 25% 0 0 0;
+
+}
+
+.container{
+	width: 100%;
+	margin: auto;
+	text-align: center;
+	margin-bottom: 15px;
+	display: inline-block;
+}
+
+.container > .txt{
+    font-size: 24px;
+	width: auto;
+	display: inline-block;
+	color: white;
+}
+
+.minicontainer > .txt{
+    font-size: 16px;
+	width: auto;
+	display: inline-block;
+	color: white;
+}
+
+#cadastro {
+	width: auto;
+	display: inline-block;
+	color: red;
+}
+
+.button {
+    background-color: lightblue;
+    border: none;
+    color: darkblue;
+    padding: 8px 13px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+	font-weight: bold;
+	border-radius: 3px;
+}
+</style>
+
+<script>
+var id = document.getElementById('id');
+var pass = document.getElementById('pass');
+var btCad = document.getElementById('cadastrar');
+var btVer = document.getElementById('verificar');
+var verificado = document.getElementById('cadastro');
+</script>
+<body>
+<div class = "screen">
+<div class = "container"><div class = "txt">Usuario: <input type="text" id = "id"></div></div>
+<div class = "container"><div class = "txt">Senha: <input type="text" id = "pass"></div></div>
+<div class = "container"><button class="button" id = "cadastrar">Cadastrar</button></div>
+<div class = "container"><button class="button" id = "verificar">Verificar Cadastro</button></div>
+<div class = "minicontainer"><div class = "txt" >Cadastro verificado?</div> <div type="txt" id = "cadastro">Nao</div></div>
+</div>
+</body>
+</html>
