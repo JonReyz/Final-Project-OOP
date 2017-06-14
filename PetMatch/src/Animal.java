@@ -29,30 +29,31 @@ public class Animal {
 		System.out.println("Digite as caracteristicas do animal que deseja cadastrar.");
 		
 		System.out.println("Tipo do animal (gato, cao)");
-		tipo = EntradaTeclado.leString();
+		tipo = EntradaTeclado.leString().toLowerCase();
+		
 		
 		System.out.println("Nome do animal");
 		nome = EntradaTeclado.leString();
 		
 		System.out.println("Sexo do animal");
-		sexo = EntradaTeclado.leString();
+		sexo = EntradaTeclado.leString().toLowerCase();
 		
 		status = false; //setar o status do animal para false (n adotado)
 		
 		System.out.println("Porte do animal (pequeno, medio ou grande)");
-		porte = EntradaTeclado.leString();
+		porte = EntradaTeclado.leString().toLowerCase();
 		
 		System.out.println("Descreva a pelagem do animal (pelo curto, longo...)");
-		pelagem = EntradaTeclado.leString();
+		pelagem = EntradaTeclado.leString().toLowerCase();
 		
 		System.out.println("Descreva o temperamento do animal (amigavel, timido, ativo...)");
-		temperamento = EntradaTeclado.leString();
+		temperamento = EntradaTeclado.leString().toLowerCase();
 		
 		System.out.println("Qual a idade do animal?");
 		idade = EntradaTeclado.leInt();
 		
 		System.out.println("O animal esta COMPLETAMENTE vacinado? (digite sim ou nao)");
-		aux = EntradaTeclado.leString();
+		aux = EntradaTeclado.leString().toLowerCase();
 		
 		if(aux.equals("sim")) vacinacao = true;
 		else vacinacao = false;
@@ -73,20 +74,20 @@ public class Animal {
 	public Animal(String[] v) throws SQLException{
 		this.id = Integer.parseInt(v[1]);
 		
-		this.nome = v[2];
+		this.nome = v[2].toLowerCase(); //os parametros q sao usados para a pesquisa sao construidos em lower-case para padronizar a pequisa 
 		
-		this.tipo = v[3];
+		this.tipo = v[3].toLowerCase();
 		
-		this.sexo = v[4];
+		this.sexo = v[4].toLowerCase();
 		
 		if(v[5].equals(0))this.status = true;
 		else this.status = false;
 		
-		this.porte = v[6];
+		this.porte = v[6].toLowerCase();
 		
-		this.pelagem = v[7];
+		this.pelagem = v[7].toLowerCase();
 		
-		this.temperamento = v[8];
+		this.temperamento = v[8].toLowerCase();
 		
 		//n guardamos o campo email
 		

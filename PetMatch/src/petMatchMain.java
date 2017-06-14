@@ -163,6 +163,33 @@ public class petMatchMain {
 	
 	
 	
+	public static void printMenuPesquisa(ArrayList<Animal> lista, Guardian user) throws SQLException, IOException{
+
+		int op = -1;
+		
+		//imprimimos a lista
+		for(int i = 0; i < lista.size(); i++){
+			System.out.print(i + ":\n");
+			lista.get(i).printAnimal();
+		}
+		
+		System.out.println("Para adicionar as informacoes de algum animal digite 0;");
+		System.out.println("Para sair digite 1.");
+		op = EntradaTeclado.leInt();
+		while(op != 1){
+			if(op == 0){
+				
+				System.out.println("Digite o indice do animal que deseja adicionar na sua lista de interesses");
+				user.addAnimalInteressante(lista.get(EntradaTeclado.leInt()));
+			}
+			
+		}
+		
+		
+		
+	}
+	
+	
 	/**
 	 * Realiza a busca utilizando um vetor de filtros
 	 * @param user - Dados do Guardian

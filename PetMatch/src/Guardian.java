@@ -69,6 +69,8 @@ public class Guardian extends User {
 		this.interest_list = interest_list;
 	}
 	
+	
+	
 	/**
 	 * Imprime dados de um usuario tipo Guardian
 	 */
