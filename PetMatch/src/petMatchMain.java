@@ -363,17 +363,19 @@ public class petMatchMain {
 				ong.putInDatabase();
 			}
 			
-			else{
+			else {
 				Guardian g = new Guardian();
 				g.putInDatabase();
 			}
+			
+			
 		}
 		
 		
-		else{
+		if (cad==0){
 			//ConnectionDb.closeDB();
 			//ConnectionDb.ConnectWithDatabase();
-			ConnectionDb.getAllTable("Users", 3);
+		
 			if (user == null){
 		
 				System.out.println("Digite seus dados");
@@ -392,7 +394,7 @@ public class petMatchMain {
 				//User u = new User();
 		
 				user = verificationLogin(login,senha);
-				if(user == null) System.out.println("Usuï¿½rio ou senha incorreta");
+				if(user == null) System.out.println("Usuário ou senha incorreta");
 			}
 			if(user.getType() == 1){ //se for ONG
 				Ong ong = ConnectionDb.getOngDB(user);
@@ -409,6 +411,23 @@ public class petMatchMain {
 		
 			//ConnectionDb.closeDB();
 		}
+		
+		if (cad ==3){
+			System.out.println("Users ------ >");
+			ConnectionDb.getAllTable("Users", 3);
+			System.out.println("Guardians ------ >");
+			ConnectionDb.getAllTable("Guardians", 3);
+			System.out.println("Ongs  ------ >");
+			ConnectionDb.getAllTable("Ongs", 6);
+			//User u = ConnectionDb.getUserDB("ongteste");
+			//Ong g = ConnectionDb.getOngDB(u);
+			
+			//String s = "insert into Ongs(email,adress,phone,cnpj,description,login) values('Ong@email2','Rua da ong2','32419262','123123123','Uma ong legal',(select login from Users where login='ongteste'))";
+			//String s1 = "select * from Ongs";
+			//ConnectionDb.insertTable(s, s1);
+		
+		}
+		
 		
 		ConnectionDb.closeDB();
 	}

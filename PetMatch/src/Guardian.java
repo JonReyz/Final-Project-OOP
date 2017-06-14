@@ -11,7 +11,7 @@ public class Guardian extends User {
 	private ArrayList<Animal> cadastrados;
 	
 	public Guardian() throws IOException{
-		
+		super(0);
 		System.out.println("Digite o seu nome");
 		name = EntradaTeclado.leString();
 		

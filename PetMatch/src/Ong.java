@@ -16,8 +16,7 @@ public class Ong extends User{
 
 	
 	public Ong() throws IOException{
-		
-		super();
+		super(1);
 		String aux;
 		
 		System.out.println("Digite o nome da sua ONG.");
@@ -149,11 +148,12 @@ public class Ong extends User{
 	 * @throws SQLException 
 	 */
 	public void printAnimaisCadastrados() throws SQLException{
-		for(int i =0 ; i < cadastrados.size(); i++){
+		//for(int i =0 ; i < cadastrados.size(); i++){
 			//imprimir os dados do animal
-			System.out.print(i + ":\n");
-			cadastrados.get(i).printAnimal();
-		}
+			//System.out.print(i + ":\n");
+			//cadastrados.get(i).printAnimal();
+		//}
+		System.out.println("Finga que aqui tem um dog");
 	}
 	/**
 	 * Imprime os dados de uma ONG
@@ -262,15 +262,16 @@ public class Ong extends User{
 	
 	public void putInDatabase(){
 		super.putInDatabase();
-		String sql = "insert into Ongs(email,adress,phone,cnpj,description,login) values('"+this.email+"','"+this.adress+"','"+this.phone+"','"+this.cnpj+"','"+this.description+",(select login from Users where login='"+super.getLogin()+"'))";
+		String sql = "insert into Ongs(email,adress,phone,cnpj,description,login) values('"+this.email+"','"+this.adress+"','"+this.phone+"','"+this.cnpj+"','"+this.description+"',(select login from Users where login='"+super.getLogin()+"'))";
 		String ver = "select * from Ongs";
+		System.out.println("Entrei no ong -->  " + sql);
 		// a considerar
-		ConnectionDb.ConnectWithDatabase();
+		//ConnectionDb.ConnectWithDatabase();
 		//talvez fazer uma verifica��o melhor
 		try {
 			ConnectionDb.insertTable(sql, ver);
 		} catch (SQLException e) {
-			System.out.println("Usu�rio j� existe");
+			System.out.println("Ong já existe");
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

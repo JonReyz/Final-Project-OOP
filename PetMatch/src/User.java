@@ -10,15 +10,13 @@ public class User {
 	 * Cadastra novo usuario
 	 * @throws IOException 
 	 */
-	public User() throws IOException{
+	public User(int t) throws IOException{
 		//lembrar de verificar banco de dados assegurando que n existem logins repetidos
 		System.out.println("Digite seu login:");
 		login = EntradaTeclado.leString();
 		System.out.println("Digite sua senha:");
 		passwd = EntradaTeclado.leString();
-		System.out.println("Voce deseja criar um perfil de ONG ou de pessoa fisica?");
-		System.out.println("0 - ONG;" + "\n" + "1 - Pessoa fisica");
-		type = EntradaTeclado.leInt();
+		type = t;
 	}
 	
 	/**
@@ -69,10 +67,11 @@ public class User {
 		// a considerar
 		//ConnectionDb.ConnectWithDatabase();
 		//talvez fazer uma verificaï¿½ï¿½o melhor
+		System.out.println("Entrei no user -->  " + sql);
 		try {
 			ConnectionDb.insertTable(sql, ver);
 		} catch (SQLException e) {
-			System.out.println("Usuï¿½rio jï¿½ existe");
+			System.out.println("User já existente");
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
