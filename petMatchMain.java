@@ -2,11 +2,18 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 
 public class petMatchMain {
 
-	public static void printMenuOng(Ong user) throws IOException{
+	/**
+	 * Imprime o menu de um usuario do tipo Ong
+	 * @param user - dados da ONG
+	 * @throws IOException
+	 * @throws SQLException
+	 */
+	public static void printMenuOng(Ong user) throws IOException, SQLException{
 		int op = -1;
 		
 				
@@ -49,7 +56,13 @@ public class petMatchMain {
 		
 	}
 	
-	public static void printMenuGuardianMain(Guardian user) throws IOException{
+	/**
+	 * Imprime o menu principal para um usuario Guardian (pessoa fisica)
+	 * @param user - Dados do Guardian
+	 * @throws IOException
+	 * @throws SQLException
+	 */
+	public static void printMenuGuardianMain(Guardian user) throws IOException, SQLException{
 		int op = -1;
 		
 		System.out.println("Para gerenciar sua lista de animais interessantes digite 0;");
@@ -62,7 +75,7 @@ public class petMatchMain {
 				printMenuGuardianInteresses(user);
 				break;
 			case 1:
-				//printMenuGuardianSearch(user);
+				busca_filtros(user, 13);//13 - numero de campos da classe Animal
 				break;
 			case 2:
 				printMenuGuardianCadastrados(user);
@@ -71,7 +84,13 @@ public class petMatchMain {
 	
 	}
 	
-	public static void printMenuGuardianCadastrados(Guardian user) throws IOException{
+	/**
+	 * Imprime o menu para gerenciamento das adocoes pelo qual o Guardian eh responsavel
+	 * @param user - Dados do Guardian
+	 * @throws IOException
+	 * @throws SQLException
+	 */
+	public static void printMenuGuardianCadastrados(Guardian user) throws IOException, SQLException{
 		int op = -1;
 		
 		
@@ -114,7 +133,11 @@ public class petMatchMain {
 		
 	}
 	
-	
+	/**
+	 * Gerador de um vetor de Strings contendo os filtros para pesquisa
+	 * @return String[] filters - vetor de filtros preenchido
+	 * @throws IOException
+	 */
 	public static String[] gera_filtros() throws IOException{
 		String[] filters = new String[5];
 		
@@ -138,20 +161,56 @@ public class petMatchMain {
 		return filters;
 	} 
 	
-	public static void busca_filtros(Guardian user, int fields) throws IOException{
+	
+	
+	/**
+	 * Realiza a busca utilizando um vetor de filtros
+	 * @param user - Dados do Guardian
+	 * @param fields - numero de campos na tabela do objeto a ser recuperado no BD
+	 * @throws IOException
+	 * @throws SQLException
+	 */
+	public static void busca_filtros(Guardian user, int fields) throws IOException, SQLException{
 		String[] filter = gera_filtros();
 		Statement s;
+		
+		String aux = "select * from Animals ";
+		if(filter[0] != "*"){
+			aux = aux + "where tipo='" + filter[0] + "' and ";
+		}
+		
+		if(filter[1] != "*"){
+			aux = aux + "sexo = '" + filter[1];
+		}
+		
+		if(filter[2] != "*"){
+			aux = aux + "' and porte = '" + filter[2];
+		}
+		
+		if(filter[3] != "*"){
+			aux = aux + "' and  pelagem = '" + filter[3];
+		}
+		
+		if(filter[4] != "*"){
+			aux = aux + "' and temperamento = '" + filter[4] + " '";
+		}
+		
+		ArrayList<Animal> l = new ArrayList<Animal>();
 		try {
 			s = ConnectionDb.con.createStatement();
 			ResultSet result = s.executeQuery("select * from Animals where tipo='"+filter[0] + "' and sexo = '" + filter[1] + "' and porte = '" + filter[2] + "' and  pelagem = '" + filter[3] + "' and temperamento = '" + filter[4] + " '");
 			//String sql = "select * from Users where login='"+login + "' and passwd = '"+ passwd +" '";
 			while (result.next()){
-            	for(int i=1;i<=fields;i++){
-            		
-            		//como armazenar o animal em si?
-            		System.out.print(result.getString(i) + " - " );
+            	String[] v = new String[fields + 1];
+            	
+            	for(int i = 1; i <= fields; i++){
+            		v[i] = result.getString(i);
             	}
-				System.out.println();
+            	
+            	
+            	Animal a = new Animal(v); //copia info do animal
+            	l.add(a); //adiciona o animal
+            	
             }
 			result.close();
 			s.close();
@@ -160,13 +219,26 @@ public class petMatchMain {
 			e.printStackTrace();
 		}
 		
+		//impressao da lista obtida com a ultima filtragem
+				for(int i = 0; i < l.size(); i++){
+					System.out.print(i + ":\n");
+					l.get(i).printAnimal();
+					
+				}
+		
+		
 		
 		
 	}
 	
 	
-	
-	public static void printMenuGuardianInteresses(Guardian user) throws IOException{
+	/**
+	 * Imprime a lista de animais que interessam ao Guardian e oferece as operacoes sobre ela
+	 * @param user - dados do Guardian
+	 * @throws IOException
+	 * @throws SQLException
+	 */
+	public static void printMenuGuardianInteresses(Guardian user) throws IOException, SQLException{
 		int op = -1;
 		
 		user.printAnimaisInteressantes();
@@ -194,7 +266,7 @@ public class petMatchMain {
 					break;
 				case 2:
 					System.out.println("Digite, conforme requisitado, os campos que descrevem o animal questa procurando, caso nao tenha certeza digite '*' (sem aspas)." );
-					busca_filtros(user, 14); //numero de campos na tabela Animals
+					busca_filtros(user, 13); //numero de campos na tabela Animals
 					break;
 					
 					
@@ -227,7 +299,7 @@ public class petMatchMain {
 	
 	public static void main(String[] args) throws IOException, SQLException{
 		User user = null;
-		int t = 0;
+		
 		//ConnectionDb.closeDB();
 		ConnectionDb.ConnectWithDatabase();
 		ConnectionDb.getAllTable("Users", 3);
@@ -251,19 +323,16 @@ public class petMatchMain {
 			user = verificationLogin(login,senha);
 			if(user == null) System.out.println("Usu�rio ou senha incorreta");
 		}
-				
-		
-		//como saber se eh ong ou guardian?
-		if(t == 0){ //se for ONG
-				//Ong ong = new Ong();
-				//printMenuOng(ong);
+		if(user.getType() == 1){ //se for ONG
+				Ong ong = ConnectionDb.getOngDB(user);
+				printMenuOng(ong);
 			
 		}
 		
 		else{ //se for pessoa fisica
-				//Guardian g = new Guardian();
-				
-				//printMenuGuardianMain(g);
+				Guardian g = ConnectionDb.getGuardianDB(user);
+				System.out.println("Email : "+ g.getLogin());
+				printMenuGuardianMain(g);
 			
 		}
 		

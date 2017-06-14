@@ -1,6 +1,7 @@
 
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Guardian extends User {
@@ -20,6 +21,20 @@ public class Guardian extends User {
 		interest_list = new ArrayList<Animal>();
 		cadastrados = new ArrayList<Animal>();
 		
+	}
+	
+	/**
+	 * Construtor alternativo para preencher um objeto Guardian baseado nos dados obtidos de um User e do BD
+	 * @param u - User contendo info para o super construtor
+	 * @param n - nome do Guardian
+	 * @param e - email do guardian
+	 */
+	public Guardian(User u, String n, String e) {
+		super(u.getLogin(),u.getPasswd(),u.getType());
+		name = n;
+		email= e;
+		interest_list = new ArrayList<Animal>();
+		cadastrados = new ArrayList<Animal>();
 	}
 
 	public ArrayList<Animal> getCadastrados() {
@@ -67,8 +82,9 @@ public class Guardian extends User {
 	
 	/**
 	 * Imprime a lista de animais interessantes
+	 * @throws SQLException 
 	 */
-	public void printAnimaisInteressantes(){
+	public void printAnimaisInteressantes() throws SQLException{
 		for(int i = 0; i < interest_list.size(); i++){
 			System.out.print(i + ":\n");
 			interest_list.get(i).printAnimal();
@@ -98,8 +114,9 @@ public class Guardian extends User {
 	
 	/**
 	 * Imprime a lista de animais cadastrados pelo usuario
+	 * @throws SQLException 
 	 */
-	public void printAnimaisCadastrados(){
+	public void printAnimaisCadastrados() throws SQLException{
 		for(int i =0 ; i < cadastrados.size(); i++){
 			//imprimir os dados do animal
 			System.out.print(i + ":\n");

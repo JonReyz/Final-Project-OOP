@@ -21,7 +21,12 @@ public class User {
 		type = EntradaTeclado.leInt();
 	}
 	
-	
+	/**
+	 * Construtor alternativo para gerar um User a partir das informacoes do BD
+	 * @param l - login do User
+	 * @param p - senha do User
+	 * @param t - tipo do User (ONG ou Guardian)
+	 */
 	public User(String l, String p, int t) {
 		login = l;
 		passwd = p;
@@ -55,7 +60,7 @@ public class User {
 		this.type = type;
 	}
 	/**
-	 * Função responsável por cadastrar o objeto no banco de dados
+	 * Funï¿½ï¿½o responsï¿½vel por cadastrar o objeto no banco de dados
 	 */
 	public void putInDatabase(){
 		
@@ -63,11 +68,11 @@ public class User {
 		String ver = "select * from Users";
 		// a considerar
 		ConnectionDb.ConnectWithDatabase();
-		//talvez fazer uma verificação melhor
+		//talvez fazer uma verificaï¿½ï¿½o melhor
 		try {
 			ConnectionDb.insertTable(sql, ver);
 		} catch (SQLException e) {
-			System.out.println("Usuário já existe");
+			System.out.println("Usuï¿½rio jï¿½ existe");
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

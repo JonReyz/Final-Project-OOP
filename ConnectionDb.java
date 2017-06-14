@@ -151,7 +151,7 @@ public class ConnectionDb {
 			s.close();	
 			
 		} catch (SQLException e) {
-			System.out.println("Erro ao obter usuário");
+			System.out.println("Erro ao obter usuï¿½rio");
 			con.close();
 			e.printStackTrace();
 		}
@@ -159,6 +159,62 @@ public class ConnectionDb {
 		return user;
 	}
 	
+	
+	/**
+	 * Retorna os dados de um Guardian baseado no login do User
+	 * @param u - user que contem o login utilizado para a busca no BD
+	 * @return Guardian guardian - retorna um objeto Guardian para uso
+	 * @throws SQLException
+	 */
+	public static Guardian getGuardianDB(User u) throws SQLException{
+		Statement s;
+		String sql = "select * from Guardians where login='" + u.getLogin() +"'";
+		System.out.println(sql);
+		Guardian guardian = null;
+		try {
+			s = con.createStatement();
+			ResultSet result = s.executeQuery(sql);
+			result.next();
+			guardian = new Guardian(u,result.getString(1),result.getString(2)); ///(?) ta dando ruim aqui - Estado do cursor invalido
+			result.close();	
+			s.close();	
+			
+		} catch (SQLException e) {
+			System.out.println("Erro ao obter usuï¿½rio");
+			con.close();
+			e.printStackTrace();
+		}
+		
+		return guardian;
+	}
+	
+	/**
+	 * Retorna os dados de um Ong baseado no login do User
+	 * @param u - user que contem o login utilizado para a busca no BD
+	 * @return Ong ong - retorna um objeto Ong para uso
+	 * @throws SQLException
+	 */
+	public static Ong getOngDB(User u) throws SQLException{
+		Statement s;
+		String sql = "select * from Ongs where login='" + u.getLogin() +"'";
+		System.out.println(sql);
+		Ong ong = null;
+		try {
+			s = con.createStatement();
+			ResultSet result = s.executeQuery(sql);
+			result.next();
+			ong = new Ong(u,result.getString(1),result.getString(2), result.getString(3), result.getString(4), result.getString(5));
+			result.close();	
+			s.close();	
+			
+		} catch (SQLException e) {
+			System.out.println("Erro ao obter usuï¿½rio");
+			con.close();
+			e.printStackTrace();
+		}
+		
+		return ong;
+	}
 	
 	/**
 	 * Funï¿½ï¿½o para fechar a conexï¿½o com o banco de dados
@@ -183,7 +239,7 @@ public class ConnectionDb {
 			return true;
 		} catch (SQLException sqle){
 			String error = sqle.getSQLState();
-			System.out.println("Tabela não existente...");
+			System.out.println("Tabela nï¿½o existente...");
 			return false;
 		}
 	}
@@ -198,7 +254,7 @@ public class ConnectionDb {
 			return true;
 		} catch (SQLException sqle){
 			String error = sqle.getSQLState();
-			System.out.println("Comando não existente...");
+			System.out.println("Comando nï¿½o existente...");
 			return false;
 		}
 	}
@@ -214,7 +270,7 @@ public class ConnectionDb {
 		
 		String insert3 = "insert into Guardians(name,email,login) values('Teste de cliente','teste@cliente.com',(select login from Users where login='admin'))";
 		String insert4 = "insert into Ongs(email,adress,phone,cnpj,description,login) values('Ong@email','Rua da ong','32419262','123123123','Uma ong legal',(select login from Users where login='ong'))";
-		String insert5 = "insert into Animals(name,tipo,sexo,status,porte,pelagem, temperamento,email,idade,vacinacao,responsavel,description) values('Pillow','Gato','F','0','Pequena','Curto','Dócil','asd@asd',3,'0',(select login from Users where login='ong'),'Uma gatinha fofa')";
+		String insert5 = "insert into Animals(name,tipo,sexo,status,porte,pelagem, temperamento,email,idade,vacinacao,responsavel,description) values('Pillow','Gato','F','0','Pequena','Curto','Dï¿½cil','asd@asd',3,'0',(select login from Users where login='ong'),'Uma gatinha fofa')";
 		
 		
 		

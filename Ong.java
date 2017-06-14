@@ -1,5 +1,6 @@
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Ong extends User{
@@ -47,6 +48,25 @@ public class Ong extends User{
 		
 	}
 	
+	/**
+	 * Construtor alternativo para preencher um objeto Ong baseado nos dados obtidos de um User e do BD
+	 * @param u - User contendo info para construir um objeto User
+	 * @param email - email da ONg
+	 * @param adress - endereco da ong
+	 * @param phone - telefone da ong
+	 * @param cnpj - cnpj da ong
+	 * @param des - descricao da ong
+	 */
+	public Ong(User u, String email, String adress, String phone, String cnpj, String des) {
+		super(u.getLogin(),u.getPasswd(),u.getType());
+		this.adress = adress;
+		this.email = email;
+		this.cnpj = cnpj;
+		this.description = des;
+		this.phone = phone;
+		
+	}
+
 	public String getEmail() {
 		return email;
 	}
@@ -126,8 +146,9 @@ public class Ong extends User{
 	
 	/**
 	 * Imprime a lista de animais cadastrados pelo usuario
+	 * @throws SQLException 
 	 */
-	public void printAnimaisCadastrados(){
+	public void printAnimaisCadastrados() throws SQLException{
 		for(int i =0 ; i < cadastrados.size(); i++){
 			//imprimir os dados do animal
 			System.out.print(i + ":\n");
@@ -241,14 +262,3 @@ public class Ong extends User{
 
 }
 
-//private String tipo; //gato ou cao ou...?
-//private String nome; //nome do animal
-//private String sexo; //femea ou macho 
-//private boolean status; //adotado ou nao
-//private String porte; //pequeno, medio ou grande
-//private String pelagem; //curto, medio ou longo
-//private String temperamento; //amigavel, timido
-//private int idade; //idade do animal
-//private boolean vacinacao; //completamento vacinado ou nao
-//private User responsavel; //ong ou usuario responsavel pela adocao
-//private String descricao; // uma descri��o b�sica do animal
