@@ -241,7 +241,7 @@ public class petMatchMain {
 		ArrayList<Animal> l = new ArrayList<Animal>();
 		
 		try {
-			System.out.print("EEEEEEEuuuasdasdas");
+			
 			s = ConnectionDb.con.createStatement();
 			ResultSet result = s.executeQuery(aux);
 			//String sql = "select * from Users where login='"+login + "' and passwd = '"+ passwd +" '";
@@ -250,10 +250,14 @@ public class petMatchMain {
             	
             	for(int i = 1; i <= fields; i++){
             		v[i] = result.getString(i);
-            		System.out.println("Buscado : "+ i +"  " + v[i]);
-            		Animal a = new Animal(v); //copia info do animal
-            		l.add(a); //adiciona o animal
+//            		System.out.println("Buscado : "+ i +"  " + v[i]);
+            		
             	}
+            	Animal a = new Animal(v); //copia info do animal
+        		l.add(a); //adiciona o animal
+            	
+            	
+            	
 			}
 			result.close();
 			s.close();

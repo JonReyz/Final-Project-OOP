@@ -73,7 +73,7 @@ public class Animal {
 	 */
 	public Animal(String[] v) throws SQLException{
 		this.id = Integer.parseInt(v[1]);
-		System.out.println(v.toString());
+		
 		this.nome = v[2];//os parametros q sao usados para a pesquisa sao construidos em lower-case para padronizar a pequisa 
 		
 		this.tipo = v[3];
@@ -91,12 +91,12 @@ public class Animal {
 		
 		//n guardamos o campo email
 		
-		//this.idade = Integer.parseInt(v[10]);
-		//if(v[11].equals(0)) this.vacinacao = true;
-		//else this.vacinacao = false;
+		this.idade = Integer.parseInt(v[10]);
+		if(v[11].equals(0)) this.vacinacao = true;
+		else this.vacinacao = false;
 		
-		//User user = ConnectionDb.getUserDB(v[12]);
-		//this.responsavel = user;
+		User user = ConnectionDb.getUserDB(v[12]);
+		this.responsavel = user;
 		
 		
 		this.descricao = v[13];
@@ -258,14 +258,14 @@ public class Animal {
 		if(vacinacao) System.out.print("\tAnimal completamente vacinado\n");
 		else System.out.print("\tAnimal nao esta completamente vacinado. Tratar com o Reponsavel\n");
 		
-		if (responsavel.getType() == 0){
+		if (responsavel.getType() == 1){
 			Ong ong = ConnectionDb.getOngDB(responsavel);
 			ong.printOng();
 		}
 		else{ 
 			Guardian guardian = ConnectionDb.getGuardianDB(responsavel);
 			guardian.printGuardian(); //(?) aqui ta dando NullPointerException - creio q fazer uma funcao q popula a lista seja o suficiente
-		}
+		}	
 		
 		System.out.println("\tDescricao do Animal:");
 		System.out.println("\t\t" + descricao);

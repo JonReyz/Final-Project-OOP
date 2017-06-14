@@ -175,7 +175,7 @@ public class ConnectionDb {
 			s = con.createStatement();
 			ResultSet result = s.executeQuery(sql);
 			result.next();
-			guardian = new Guardian(u,result.getString(1),result.getString(2)); ///(?) ta dando ruim aqui - Estado do cursor invalido
+			guardian = new Guardian(u,result.getString(2),result.getString(3)); ///(?) ta dando ruim aqui - Estado do cursor invalido
 			result.close();	
 			s.close();	
 			
