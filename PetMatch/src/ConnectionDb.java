@@ -261,16 +261,27 @@ public class ConnectionDb {
 	
 	public static void main(String[] args) {
 		
-		String create = "create table teste123 (id int not null generated always as identity constraint use_pk primary key, name varchar(30) not null, passwd varchar(30) not null)";
-		String ver = "select * from Guardians";
-		String update="drop table Users";
+		String create = "create table Adoptions ("
+				+"adp_id int not null generated always as identity (start with 0, increment by 1),"
+				+"guardian varchar(32) not null,"
+				+"animal int not null,"
+				+"CONSTRAINT adp_pk PRIMARY KEY (adp_id),"
+				+"CONSTRAINT adpU_fk FOREIGN KEY (guardian) REFERENCES Users(login),"
+				+"CONSTRAINT adpA_fk FOREIGN KEY (animal) REFERENCES Animals(animal_id)"
+				+")";
+		String ver = "select * from Adoptions";
+		String update="drop table Animals";
+		
+		
+		
 		
 		String insert1 = "insert into Users(login,passwd,type) values('admin','admin',0)";
 		String insert2 = "insert into Users(login,passwd,type) values('ong','ong',1)";
 		
-		String insert3 = "insert into Guardians(name,email,login) values('Teste de cliente','teste@cliente.com',(select login from Users where login='admin'))";
-		String insert4 = "insert into Ongs(email,adress,phone,cnpj,description,login) values('Ong@email','Rua da ong','32419262','123123123','Uma ong legal',(select login from Users where login='ong'))";
-		String insert5 = "insert into Animals(name,tipo,sexo,status,porte,pelagem, temperamento,email,idade,vacinacao,responsavel,description) values('Pillow','Gato','F','0','Pequena','Curto','Dï¿½cil','asd@asd',3,'0',(select login from Users where login='ong'),'Uma gatinha fofa')";
+		String insert3 = "insert into Animals(name,tipo,sexo,status,porte,pelagem, temperamento,idade,vacinacao,responsavel,description) values('Obitão','Cão','M','0','Grande','Grande','Brabo',3,'0',(select login from Users where login='ong'),'Obitão é brabo')";
+
+		String insert4 = "insert into Animals(name,tipo,sexo,status,porte,pelagem, temperamento,idade,vacinacao,responsavel,description) values('Pillow','Gato','F','0','Pequena','Curto','Dócil',3,'0',(select login from Users where login='ong'),'Uma gatinha fofa')";
+		String insert5 = "insert into Animals(name,tipo,sexo,status,porte,pelagem, temperamento,idade,vacinacao,responsavel,description) values('Obitinho','Cão','M','0','pequeno','pequeno','dócil',10,'0',(select login from Users where login='ong'),'heeey')";
 		
 		
 		
@@ -290,12 +301,12 @@ public class ConnectionDb {
 		//db.closeDB();
 		
 		String insert = "insert into teste123(name,passwd) values('Joï¿½o', '123456')";
-		String table = "teste123";
+		String table = "Animals";
 		try {
-			//db.createTable(createUsers, ver);
+			db.createTable(create, ver);
 			//db.getAllTable(table, 3);
 			//db.deleteTable(table,"name", "Joï¿½o");
-			//db.insertTable(insert5, ver);
+			//db.insertTable(insert4, ver);
 			//db.getAllTable("Animals", 13);
 			db.closeDB();
 		
