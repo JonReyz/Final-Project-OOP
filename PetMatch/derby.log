@@ -1,13 +1,13 @@
 ----------------------------------------------------------------
-Wed Jun 14 13:37:41 BRT 2017:
- Inicializando o Derby vers√£o The Apache Software Foundation - Apache Derby - 10.13.1.1 - (1765088): inst√¢ncia a816c00e-015c-a777-baab-000006ba7cd8
-no diret√≥rio de banco de dados /home/danilo/Documentos/poo_017/Final-Project-OOP/PetMatch/Data/database 
+Wed Jun 14 14:57:51 BRT 2017:
+ Inicializando o Derby vers„o The Apache Software Foundation - Apache Derby - 10.13.1.1 - (1765088): inst‚ncia a816c00e-015c-a7c1-206d-000000c4c0b0
+no diretÛrio de banco de dados C:\Users\JOAO PEDRO\Desktop\POO\Final-Project-OOP\PetMatch\Data\database 
 
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_131-b11
-user.dir=/home/danilo/Documentos/poo_017/Final-Project-OOP/PetMatch
-os.name=Linux
-os.arch=amd64
-os.version=3.16.0-4-amd64
+user.dir=C:\Users\JOAO PEDRO\Desktop\POO\Final-Project-OOP\PetMatch
+os.name=Windows 7
+os.arch=x86
+os.version=6.1
 derby.system.home=null
 Carregador de classe do banco de dados iniciado - derby.database.classpath=''

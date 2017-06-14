@@ -200,45 +200,61 @@ public class petMatchMain {
 	public static void busca_filtros(Guardian user, int fields) throws IOException, SQLException{
 		String[] filter = gera_filtros();
 		Statement s;
-		
+		int count = 0;
 		String aux = "select * from Animals ";
-		if(filter[0] != "*"){
-			aux = aux + "where tipo='" + filter[0] + "' and ";
+		if(!filter[0].equals("*")){
+			if(count == 0 ) aux += " where ";
+			aux = aux + "tipo='" + filter[0] + "'";
+			count++;
 		}
 		
-		if(filter[1] != "*"){
-			aux = aux + "sexo = '" + filter[1];
+		if(!filter[1].equals("*")){
+			if(count == 0 ) aux += " where ";
+			else aux+= " and ";
+			count++;
+			aux = aux + " sexo = '" + filter[1] + "'";
 		}
 		
-		if(filter[2] != "*"){
-			aux = aux + "' and porte = '" + filter[2];
+		if(!filter[2].equals("*")){
+			if(count == 0 ) aux += " where ";
+			else aux+= " and ";
+			count++;
+			aux = aux + " porte = '" + filter[2] + "'";
 		}
 		
-		if(filter[3] != "*"){
-			aux = aux + "' and  pelagem = '" + filter[3];
+		if(!filter[3].equals("*")){
+			if(count == 0 ) aux += " where ";
+			else aux+= " and ";
+			count++;
+			aux = aux + " pelagem = '" + filter[3] + "'";
 		}
 		
-		if(filter[4] != "*"){
-			aux = aux + "' and temperamento = '" + filter[4] + " '";
+		if(!filter[4].equals("*")){
+			if(count == 0 ) aux += " where ";
+			else aux+= " and ";
+			count++;
+			aux = aux + " temperamento = '" + filter[4] + "'";
 		}
+		
+		System.out.println(aux);
 		
 		ArrayList<Animal> l = new ArrayList<Animal>();
+		
 		try {
+			System.out.print("EEEEEEEuuuasdasdas");
 			s = ConnectionDb.con.createStatement();
-			ResultSet result = s.executeQuery("select * from Animals where tipo='"+filter[0] + "' and sexo = '" + filter[1] + "' and porte = '" + filter[2] + "' and  pelagem = '" + filter[3] + "' and temperamento = '" + filter[4] + " '");
+			ResultSet result = s.executeQuery(aux);
 			//String sql = "select * from Users where login='"+login + "' and passwd = '"+ passwd +" '";
 			while (result.next()){
             	String[] v = new String[fields + 1];
             	
             	for(int i = 1; i <= fields; i++){
             		v[i] = result.getString(i);
+            		System.out.println("Buscado : "+ i +"  " + v[i]);
+            		Animal a = new Animal(v); //copia info do animal
+            		l.add(a); //adiciona o animal
             	}
-            	
-            	
-            	Animal a = new Animal(v); //copia info do animal
-            	l.add(a); //adiciona o animal
-            	
-            }
+			}
 			result.close();
 			s.close();
 		} catch (SQLException e) {
@@ -255,7 +271,7 @@ public class petMatchMain {
 		
 		
 		
-		
+				
 	}
 	
 	

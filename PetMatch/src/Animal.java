@@ -73,31 +73,30 @@ public class Animal {
 	 */
 	public Animal(String[] v) throws SQLException{
 		this.id = Integer.parseInt(v[1]);
+		System.out.println(v.toString());
+		this.nome = v[2];//os parametros q sao usados para a pesquisa sao construidos em lower-case para padronizar a pequisa 
 		
-		this.nome = v[2].toLowerCase(); //os parametros q sao usados para a pesquisa sao construidos em lower-case para padronizar a pequisa 
+		this.tipo = v[3];
 		
-		this.tipo = v[3].toLowerCase();
+		this.sexo = v[4];
 		
-		this.sexo = v[4].toLowerCase();
+		//if(v[5].equals('0'))this.status = true;
+		//else this.status = false;
 		
-		if(v[5].equals(0))this.status = true;
-		else this.status = false;
+		this.porte = v[6];
 		
-		this.porte = v[6].toLowerCase();
+		this.pelagem = v[7];
 		
-		this.pelagem = v[7].toLowerCase();
-		
-		this.temperamento = v[8].toLowerCase();
+		this.temperamento = v[8];
 		
 		//n guardamos o campo email
 		
-		this.idade = Integer.parseInt(v[10]);
+		//this.idade = Integer.parseInt(v[10]);
+		//if(v[11].equals(0)) this.vacinacao = true;
+		//else this.vacinacao = false;
 		
-		if(v[11].equals(0)) this.vacinacao = true;
-		else this.vacinacao = false;
-		
-		User user = ConnectionDb.getUserDB(v[12]);
-		this.responsavel = user;
+		//User user = ConnectionDb.getUserDB(v[12]);
+		//this.responsavel = user;
 		
 		
 		this.descricao = v[13];
