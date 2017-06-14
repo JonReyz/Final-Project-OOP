@@ -80,8 +80,8 @@ public class Animal {
 		
 		this.sexo = v[4];
 		
-		//if(v[5].equals('0'))this.status = true;
-		//else this.status = false;
+		if(v[5].equals("0"))this.status = true;
+		else this.status = false;
 		
 		this.porte = v[6];
 		
@@ -92,14 +92,14 @@ public class Animal {
 		//n guardamos o campo email
 		
 		this.idade = Integer.parseInt(v[10]);
-		if(v[11].equals(0)) this.vacinacao = true;
+		if(v[11].equals("0")) this.vacinacao = true;
 		else this.vacinacao = false;
 		
-		User user = ConnectionDb.getUserDB(v[12]);
+		User user = ConnectionDb.getUserDB(v[11]);
 		this.responsavel = user;
 		
 		
-		this.descricao = v[13];
+		this.descricao = v[12];
 		
 		
 		
@@ -270,5 +270,28 @@ public class Animal {
 		System.out.println("\tDescricao do Animal:");
 		System.out.println("\t\t" + descricao);
 		
+	}
+	
+	public void putInDatabase(){
+		String aux1, aux2;
+		if(this.status) aux1 = "0"; //0 eh true
+		else aux1 = "1";
+		
+		if(this.vacinacao) aux2 = "0";
+		else aux2 = "1";
+		
+		
+		String sql = "insert into Animals(name,tipo,sexo,status,porte,pelagem, temperamento,idade,vacinacao,responsavel,description) values('"+this.nome+"','"+this.tipo+"','"+this.sexo+"','"+aux1+"','"+this.porte+"','"+this.pelagem+"','"+this.temperamento+"',"+this.idade+",'"+aux2+"',(select login from Users where login='"+this.responsavel.getLogin()+"'),'"+this.descricao+"')";
+		String ver = "select * from Animals";
+		// a considerar
+		ConnectionDb.ConnectWithDatabase();
+		//talvez fazer uma verifica��o melhor
+		try {
+			ConnectionDb.insertTable(sql, ver);
+		} catch (SQLException e) {
+			System.out.println("Usu�rio j� existe");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

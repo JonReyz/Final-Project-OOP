@@ -64,10 +64,10 @@ public class User {
 	 */
 	public void putInDatabase(){
 		
-		String sql = "insert into Users(name,passwd,type) values('"+this.login+"','" + this.passwd +"','"+this.type+"')";
+		String sql = "insert into Users(login,passwd,type) values('"+this.login+"','" + this.passwd +"',"+this.type+")";
 		String ver = "select * from Users";
 		// a considerar
-		ConnectionDb.ConnectWithDatabase();
+		//ConnectionDb.ConnectWithDatabase();
 		//talvez fazer uma verifica��o melhor
 		try {
 			ConnectionDb.insertTable(sql, ver);

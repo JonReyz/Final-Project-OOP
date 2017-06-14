@@ -210,6 +210,22 @@ public class Guardian extends User {
 	
 	}
 	
+public void putInDatabase(){
+		super.putInDatabase();
+		String sql = "insert into Guardians(name,email,login) values('"+this.name+"','" + this.email +"',"+"(select login from Users where login='" + super.getLogin()+"'))";
+		String ver = "select * from Guardians";
+		// a considerar
+		ConnectionDb.ConnectWithDatabase();
+		//talvez fazer uma verifica��o melhor
+		try {
+			ConnectionDb.insertTable(sql, ver);
+		} catch (SQLException e) {
+			System.out.println("Usu�rio j� existe");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	
 	
 	

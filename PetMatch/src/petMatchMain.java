@@ -37,6 +37,7 @@ public class petMatchMain {
 				break;
 			case 2:
 				Animal animal = new Animal(user);
+				animal.putInDatabase();
 				user.addAnimalCadastrado(animal);
 				break;
 				
@@ -75,7 +76,7 @@ public class petMatchMain {
 				printMenuGuardianInteresses(user);
 				break;
 			case 1:
-				busca_filtros(user, 13);//13 - numero de campos da classe Animal
+				busca_filtros(user, 12);//12 - numero de campos da classe Animal
 				break;
 			case 2:
 				printMenuGuardianCadastrados(user);
@@ -114,6 +115,7 @@ public class petMatchMain {
 				break;
 			case 2:
 				Animal animal = new Animal(user);
+				animal.putInDatabase();
 				user.addAnimalCadastrado(animal);
 				break;
 				
@@ -346,41 +348,66 @@ public class petMatchMain {
 	
 	public static void main(String[] args) throws IOException, SQLException{
 		User user = null;
+		int cad = -1;
 		
-		//ConnectionDb.closeDB();
 		ConnectionDb.ConnectWithDatabase();
-		ConnectionDb.getAllTable("Users", 3);
-		if (user == null){
 		
-			System.out.println("Digite seus dados");
-			System.out.print("Login: ");
+		System.out.println("Deseja fazer login? Pressione 0\nDeseja se cadastrar? Pressione 1");
+		cad = EntradaTeclado.leInt();
 		
-			String login = EntradaTeclado.leString();
-			System.out.print('\n');
-			System.out.print("Senha: ");
-			String senha = EntradaTeclado.leString();
-			System.out.print('\n');
-		
-			//Autenticao dos dados retorna um objeto User
-		
-			//obtencao do tipo sem o login efetivo
-			// t = EntradaTeclado.leInt();
-			//User u = new User();
-		
-			user = verificationLogin(login,senha);
-			if(user == null) System.out.println("Usu�rio ou senha incorreta");
+		if(cad == 1){
+			System.out.println("Para se cadastrar como uma ONG digite 1, senao digite 0.");
+			cad = EntradaTeclado.leInt();
+			if(cad == 1){
+				Ong ong = new Ong();
+				ong.putInDatabase();
+			}
+			
+			else{
+				Guardian g = new Guardian();
+				g.putInDatabase();
+			}
 		}
-		if(user.getType() == 1){ //se for ONG
+		
+		
+		else{
+			//ConnectionDb.closeDB();
+			//ConnectionDb.ConnectWithDatabase();
+			ConnectionDb.getAllTable("Users", 3);
+			if (user == null){
+		
+				System.out.println("Digite seus dados");
+				System.out.print("Login: ");
+		
+				String login = EntradaTeclado.leString();
+				System.out.print('\n');
+				System.out.print("Senha: ");
+				String senha = EntradaTeclado.leString();
+				System.out.print('\n');
+		
+				//Autenticao dos dados retorna um objeto User
+		
+				//obtencao do tipo sem o login efetivo
+				// t = EntradaTeclado.leInt();
+				//User u = new User();
+		
+				user = verificationLogin(login,senha);
+				if(user == null) System.out.println("Usu�rio ou senha incorreta");
+			}
+			if(user.getType() == 1){ //se for ONG
 				Ong ong = ConnectionDb.getOngDB(user);
 				printMenuOng(ong);
 			
-		}
+			}
 		
-		else{ //se for pessoa fisica
+			else{ //se for pessoa fisica
 				Guardian g = ConnectionDb.getGuardianDB(user);
 				System.out.println("Email : "+ g.getLogin());
 				printMenuGuardianMain(g);
 			
+			}
+		
+			//ConnectionDb.closeDB();
 		}
 		
 		ConnectionDb.closeDB();

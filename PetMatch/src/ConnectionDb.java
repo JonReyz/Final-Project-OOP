@@ -185,6 +185,7 @@ public class ConnectionDb {
 			e.printStackTrace();
 		}
 		
+		guardian.printGuardian();
 		return guardian;
 	}
 	
@@ -203,7 +204,7 @@ public class ConnectionDb {
 			s = con.createStatement();
 			ResultSet result = s.executeQuery(sql);
 			result.next();
-			ong = new Ong(u,result.getString(1),result.getString(2), result.getString(3), result.getString(4), result.getString(5));
+			ong = new Ong(u,result.getString(2),result.getString(3), result.getString(4), result.getString(5), result.getString(6));
 			result.close();	
 			s.close();	
 			
@@ -278,10 +279,10 @@ public class ConnectionDb {
 		String insert1 = "insert into Users(login,passwd,type) values('admin','admin',0)";
 		String insert2 = "insert into Users(login,passwd,type) values('ong','ong',1)";
 		
-		String insert3 = "insert into Animals(name,tipo,sexo,status,porte,pelagem, temperamento,idade,vacinacao,responsavel,description) values('Obitão','Cão','M','0','Grande','Grande','Brabo',3,'0',(select login from Users where login='ong'),'Obitão é brabo')";
+		String insert3 = "insert into Animals(name,tipo,sexo,status,porte,pelagem, temperamento,idade,vacinacao,responsavel,description) values('Obitï¿½o','Cï¿½o','M','0','Grande','Grande','Brabo',3,'0',(select login from Users where login='ong'),'Obitï¿½o ï¿½ brabo')";
 
-		String insert4 = "insert into Animals(name,tipo,sexo,status,porte,pelagem, temperamento,idade,vacinacao,responsavel,description) values('Pillow','Gato','F','0','Pequena','Curto','Dócil',3,'0',(select login from Users where login='ong'),'Uma gatinha fofa')";
-		String insert5 = "insert into Animals(name,tipo,sexo,status,porte,pelagem, temperamento,idade,vacinacao,responsavel,description) values('Obitinho','Cão','M','0','pequeno','pequeno','dócil',10,'0',(select login from Users where login='ong'),'heeey')";
+		String insert4 = "insert into Animals(name,tipo,sexo,status,porte,pelagem, temperamento,idade,vacinacao,responsavel,description) values('Pillow','Gato','F','0','Pequena','Curto','Dï¿½cil',3,'0',(select login from Users where login='ong'),'Uma gatinha fofa')";
+		String insert5 = "insert into Animals(name,tipo,sexo,status,porte,pelagem, temperamento,idade,vacinacao,responsavel,description) values('Obitinho','Cï¿½o','M','0','pequeno','pequeno','dï¿½cil',10,'0',(select login from Users where login='ong'),'heeey')";
 		
 		
 		

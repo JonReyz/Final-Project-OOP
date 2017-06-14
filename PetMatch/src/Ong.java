@@ -259,6 +259,23 @@ public class Ong extends User{
 	
 	}
 	
+	
+	public void putInDatabase(){
+		super.putInDatabase();
+		String sql = "insert into Ongs(email,adress,phone,cnpj,description,login) values('"+this.email+"','"+this.adress+"','"+this.phone+"','"+this.cnpj+"','"+this.description+",(select login from Users where login='"+super.getLogin()+"'))";
+		String ver = "select * from Ongs";
+		// a considerar
+		ConnectionDb.ConnectWithDatabase();
+		//talvez fazer uma verifica��o melhor
+		try {
+			ConnectionDb.insertTable(sql, ver);
+		} catch (SQLException e) {
+			System.out.println("Usu�rio j� existe");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 
 }
 
