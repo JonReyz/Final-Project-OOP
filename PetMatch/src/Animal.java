@@ -1,8 +1,10 @@
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class Animal {
 	//foto do cachorro
+	private int id; //id do animal no DB
 	private String tipo; //gato ou cao ou...?
 	private String nome; //nome do animal
 	private String sexo; //femea ou macho 
@@ -62,8 +64,61 @@ public class Animal {
 		
 		
 	}
+	
+	/**
+	 * Construtor alternativo  no qual ja se passa os dados a partir do BD
+	 * @param v - vetor de strigs contendo as informacoes do animal
+	 * @throws SQLException
+	 */
+	public Animal(String[] v) throws SQLException{
+		this.id = Integer.parseInt(v[1]);
+		
+		this.nome = v[2];
+		
+		this.tipo = v[3];
+		
+		this.sexo = v[4];
+		
+		if(v[5].equals(0))this.status = true;
+		else this.status = false;
+		
+		this.porte = v[6];
+		
+		this.pelagem = v[7];
+		
+		this.temperamento = v[8];
+		
+		//n guardamos o campo email
+		
+		this.idade = Integer.parseInt(v[10]);
+		
+		if(v[11].equals(0)) this.vacinacao = true;
+		else this.vacinacao = false;
+		
+		User user = ConnectionDb.getUserDB(v[12]);
+		this.responsavel = user;
+		
+		
+		this.descricao = v[13];
+		
+		
+		
+		
+		
+	}
 
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	
+	
+	
 	public String getTipo() {
 		return tipo;
 	}
@@ -175,8 +230,9 @@ public class Animal {
 	
 	/**
 	 * Imprime os dados de um animal
+	 * @throws SQLException 
 	 */
-	public void printAnimal(){
+	public void printAnimal() throws SQLException{
 		
 		//como imprimir a foto?
 		
@@ -203,12 +259,12 @@ public class Animal {
 		else System.out.print("\tAnimal nao esta completamente vacinado. Tratar com o Reponsavel\n");
 		
 		if (responsavel.getType() == 0){
-			Ong ong = (Ong) responsavel;
+			Ong ong = ConnectionDb.getOngDB(responsavel);
 			ong.printOng();
 		}
 		else{ 
-			Guardian guardian = (Guardian) responsavel;
-			guardian.printGuardian();
+			Guardian guardian = ConnectionDb.getGuardianDB(responsavel);
+			guardian.printGuardian(); //(?) aqui ta dando NullPointerException - creio q fazer uma funcao q popula a lista seja o suficiente
 		}
 		
 		System.out.println("\tDescricao do Animal:");
