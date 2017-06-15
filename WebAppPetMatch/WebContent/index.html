@@ -3,7 +3,8 @@
 <head>
 <style>
 body, html {
-    height: 99%;
+    height: 100%;
+    margin: 0px;
 }
 #tst {
  width: 100%;
@@ -12,7 +13,8 @@ body, html {
  cursor: pointer;
 }
 .menuHidden {
-    width: 5%;
+    width: 10%;
+    min-width: 80px;
     text-align: center;
     background-color: lightblue;
 	height: 100%;
@@ -239,7 +241,7 @@ function popUp(name, size, weight, src) {
             <div class='menuItem'><div class="menuItemIcon"></div><div class="menuItemText">Log out</div></div>
 	</div>
 
-	<div style="width: 100%; height: 100%; float:right; background-color: black; margin: auto;">
+	<div style="width: 100%; height: 100%; background-color: black; overflow-y: auto; display: flex; justify-content: space-around; flex-wrap: wrap;">
 		<div class="card">
 		  <img class="img-circle" src="fotos/1.jpg" onclick = "popUp('Jey', '30cm', '7 kg', 'fotos/1.jpg')">
 		</div>
