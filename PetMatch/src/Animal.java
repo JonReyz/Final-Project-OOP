@@ -272,6 +272,9 @@ public class Animal {
 		
 	}
 	
+	/**
+	 * Funcao para adicionar novas informacoes à tabela Animals no Banco de Dados.
+	 */
 	public void putInDatabase(){
 		String aux1, aux2;
 		if(this.status) aux1 = "0"; //0 eh true

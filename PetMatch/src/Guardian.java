@@ -210,7 +210,10 @@ public class Guardian extends User {
 	
 	}
 	
-public void putInDatabase(){
+	/**
+	 * Funcao para adicionar novas informacoes à tabela Guardians no Banco de Dados.
+	 */
+	public void putInDatabase(){
 		super.putInDatabase();
 		String sql = "insert into Guardians(name,email,login) values('"+this.name+"','" + this.email +"',"+"(select login from Users where login='" + super.getLogin()+"'))";
 		String ver = "select * from Guardians";

@@ -259,7 +259,9 @@ public class Ong extends User{
 	
 	}
 	
-	
+	/**
+	 * Funcao para adicionar novas informacoes à tabela Ongs no Banco de Dados.
+	 */	
 	public void putInDatabase(){
 		super.putInDatabase();
 		String sql = "insert into Ongs(email,adress,phone,cnpj,description,login) values('"+this.email+"','"+this.adress+"','"+this.phone+"','"+this.cnpj+"','"+this.description+"',(select login from Users where login='"+super.getLogin()+"'))";

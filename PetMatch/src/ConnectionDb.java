@@ -137,6 +137,12 @@ public class ConnectionDb {
 		
 	}
 	
+	/**
+	 * Funcao que retorna os dados de um User baseado no login fornecido pelo usuario
+	 * @param name - nome de login do usuario
+	 * @return User user - obejto de tipo User com as informacoes adquiridas do Banco de Dados
+	 * @throws SQLException
+	 */
 	public static User getUserDB(String name) throws SQLException{
 		Statement s;
 		String sql = "select * from Users where login='" + name +"'";

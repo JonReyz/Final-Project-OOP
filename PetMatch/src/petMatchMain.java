@@ -332,7 +332,13 @@ public class petMatchMain {
 		
 	}
 	
-	//precisamos colocar isso em uma outra classe
+	/**
+	 * Realiza a verificação de dados inseridos pelo usuario para efetuar ou não um login
+	 * @param login - login do usuario
+	 * @param passwd - senha do usuario
+	 * @return User user - retorna um objeto User contendo as informacoes correspondentes aos dados inseridos
+	 * @throws SQLException
+	 */
 	public static User verificationLogin(String login, String passwd) throws SQLException{
 		String sql = "select * from Users where login='"+login + "' and passwd = '"+ passwd +" '";
 		System.out.println(sql);
@@ -394,7 +400,7 @@ public class petMatchMain {
 				//User u = new User();
 		
 				user = verificationLogin(login,senha);
-				if(user == null) System.out.println("Usu�rio ou senha incorreta");
+				if(user == null) System.out.println("Usu�rio ou senha incorreta");
 			}
 			if(user.getType() == 1){ //se for ONG
 				Ong ong = ConnectionDb.getOngDB(user);
