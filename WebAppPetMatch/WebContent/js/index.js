@@ -131,7 +131,7 @@ function buildMenu(){
 	menu.appendChild(profilePicDiv);
 	
 	menu.appendChild(createMenuItem("Perfil", 'window.location = "perfil.html";'));
-	menu.appendChild(createMenuItem("Cadastrar", null));
+	menu.appendChild(createMenuItem("Cadastrar", 'window.location = "cadastro.html";'));
 	menu.appendChild(createMenuItem("Filtros", null));
 	menu.appendChild(createMenuItem("Log out", null));
 

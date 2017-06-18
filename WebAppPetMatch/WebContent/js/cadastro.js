@@ -9,3 +9,7 @@ function cadastrar(){
 	var tam = document.getElementById("tam").value;
 	var peso = document.getElementById("peso").value;
 }
+
+function back(){
+	window.location = "index.html";
+}
