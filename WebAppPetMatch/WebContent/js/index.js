@@ -26,6 +26,24 @@ function popUp(name, size, weight, src) {
     }
 }
 
+function createMenuItem(txt, onclick){
+	var menuItem = document.createElement("div");
+	menuItem.setAttribute("class", "menuItem");
+	menuItem.setAttribute("onclick", onclick);
+	
+	var menuItemIcon = document.createElement("div");
+	menuItemIcon.setAttribute("class", "menuItemIcon");
+	menuItem.appendChild(menuItemIcon);
+	
+	var menuItemText = document.createElement("div");
+	menuItemText.setAttribute("class", "menuItemText");
+	menuItemText.innerHTML = txt;
+	menuItem.appendChild(menuItemText);
+	
+	return menuItem;
+}
+
+
 function createCard(src, onclickFunction){
 	var card = document.createElement("div");
 	card.setAttribute("class", "card");
@@ -85,10 +103,42 @@ function buildPopUp(display){
 	display.appendChild(popUp);
 }
 
-function build(){
-	var display = document.getElementById("display");
+
+function buildMenu(){
+	var menu = document.getElementById("menu");
+	menu.setAttribute("class", "menuHidden");
 	
-	buildPopUp(display);
+	var menuClickable = document.createElement("div");
+	menuClickable.setAttribute("id", "menuClickable");
+	menuClickable.setAttribute("onclick", "menuClick()");
+	
+	var menuButton = document.createElement("input");
+	menuButton.setAttribute("class", "menuButton");
+	menuButton.setAttribute("type", "submit");
+	menuButton.setAttribute("value", "");
+	menuClickable.appendChild(menuButton);
+	
+	menu.appendChild(menuClickable);
+	
+	var profilePicDiv = document.createElement("div");
+	profilePicDiv.setAttribute("class", "picDiv");
+
+	var profilePicDivImg = document.createElement("img");
+	profilePicDivImg.setAttribute("class", "pic");
+	profilePicDivImg.setAttribute("src", "perfil/noprofile.png");
+	profilePicDiv.appendChild(profilePicDivImg);
+	
+	menu.appendChild(profilePicDiv);
+	
+	menu.appendChild(createMenuItem("Perfil", 'window.location = "perfil.html";'));
+	menu.appendChild(createMenuItem("Cadastrar", null));
+	menu.appendChild(createMenuItem("Filtros", null));
+	menu.appendChild(createMenuItem("Log out", null));
+
+}
+
+function buildDisplay(){
+	var display = document.getElementById("display");
 	
 	display.appendChild(createCard("fotos/1.jpg", "popUp('Jey', '30cm', '7 kg', 'fotos/1.jpg')"));
 	display.appendChild(createCard("fotos/2.jpg", "popUp('Alon', '30cm', '2 kg', 'fotos/2.jpg')"));
@@ -98,4 +148,11 @@ function build(){
 	display.appendChild(createCard("fotos/6.jpeg", "popUp('Pede', '1 m', '10 kg', 'fotos/6.jpeg')"));
 	display.appendChild(createCard("fotos/7.jpg", "popUp('Tristonho', '30cm', '7 kg', 'fotos/7.jpg')"));
 	display.appendChild(createCard("fotos/8.jpg", "popUp('Folhinha', '20cm', '300 g', 'fotos/8.jpg')"));
+
+	buildPopUp(display);
+}
+
+function build(){
+	buildDisplay();
+	buildMenu();
 }

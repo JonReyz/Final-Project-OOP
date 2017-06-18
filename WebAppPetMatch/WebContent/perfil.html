@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="css/cadastro.css">
+<script src="js/perfil.js"></script>
+
+<head>
+<meta charset="ISO-8859-1">
+<title>PetMatch</title>
+</head>
+<body>
+	<div style = "height: 50px; float: top; background-color: lightblue;">
+		<div onclick="back()" style = "object-fit: cover; width: auto; height: calc(100% - 10px);  overflow: hidden; padding: 5px 25px;">
+			<img style="object-fit: cover; height: 100%; width: auto; cursor: pointer;" src='icones/back.png' >
+		</div>
+	</div>
+	<div class = "screen">
+		<div class = "card"><img class="img-circle" src='perfil/noprofile.png' id="pic" style = "cursor: default;"></div></div>
+		<div class = "container" style = "position: relative; text-align: center; height: 200px;">
+			<div style="display: inline-block; width: 40%; position: absolute; right: 50%">
+				<div class = "container"><div class = "txt">Nome da foto no banco de dados: </div></div>
+				<div class = "container"><div class = "txt">Nome: </div></div>
+				<div class = "container"><div class = "txt">Contato: </div></div>
+			</div>
+		<div style="display: inline-block; width: 40%; top: 0px; position: absolute;">
+			<div class = "container"><input type="text" id = "src" style= "font-size: 24px;"></div>
+			<div class = "container"><input type="text" id = "nome" style= "font-size: 24px;"></div>
+			<div class = "container"><input type="text" id = "contato" style= "font-size: 24px;"></div>
+		</div>
+	</div>
+	<div class = "container"><button id = "cadastrar" class="button" onclick="updatePic()">Atualizar foto</button></div>
+	<div class = "container"><button class="button" onclick="cadastrar()">Salvar Mudancas</button></div>
+
+	
+</body>
+</html>

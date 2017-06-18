@@ -1,0 +1,55 @@
+body{
+	background-color: black;
+}
+
+.screen{
+	width: 100%;
+	text-align: center;
+	vertical-align: middle;
+	padding: 5% 0 0 0;
+
+}
+
+.container{
+	width: 100%;
+	margin: auto;
+	text-align: center;
+	margin-bottom: 15px;
+	display: inline-block;
+}
+
+.container > .txt{
+    font-size: 24px;
+	width: auto;
+	display: inline-block;
+	color: white;
+	float: right;
+	padding-right: 10px;
+}
+
+.minicontainer > .txt{
+    font-size: 16px;
+	width: auto;
+	display: inline-block;
+	color: white;
+}
+
+#cadastro {
+	width: auto;
+	display: inline-block;
+	color: red;
+}
+
+.button {
+    background-color: lightblue;
+    border: none;
+    color: darkblue;
+    padding: 8px 13px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+	font-weight: bold;
+	border-radius: 3px;
+}
+</style>
