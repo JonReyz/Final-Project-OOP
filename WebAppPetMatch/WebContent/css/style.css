@@ -1,0 +1,7 @@
+@import url("menu.css");
+@import url("popUp.css");
+@import url("display.css");
+body, html {
+    height: 100%;
+    margin: 0px;
+}

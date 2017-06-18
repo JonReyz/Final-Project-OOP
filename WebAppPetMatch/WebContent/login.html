@@ -2,7 +2,7 @@
 
 <style>
 body{
-	background-color: blue;
+	background-color: black;
 }
 
 .screen{
@@ -63,7 +63,7 @@ body{
 <div class = "container"><div class = "txt">Senha: <input type="text" id = "pass"></div></div>
 <div class = "container"><button id = "cadastrar" onclick="testee()">Cadastrar</button></div>
 <div class = "container"><button class="button" id = "verificar">Verificar Cadastro</button></div>
-<div class = "minicontainer"><div class = "txt" >Cadastro verificado?</div> <div type="txt" id = "cadastro">Nao</div></div>
+<div class = "minicontainer"><div class = "txt" >Cadastro verificado?</div> <div class="txt" id = "cadastro">Nao</div></div>
 </div>
 
 </body>
@@ -83,7 +83,7 @@ xhr.onreadystatechange = function() {
 }
 
 function testee(){
-	xhr.open('GET', 'answerServlet?usu=' + id.value + '&pass=' + pass.value, true);
+	xhr.open('GET', 'testServ?usu=' + id.value + '&pass=' + pass.value, true);
 	xhr.send(null);
 }
 

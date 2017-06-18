@@ -1,0 +1,64 @@
+.popShow{
+position:absolute; 
+opacity: 1;
+transition: 0.3s;
+width:500px; 
+height:600px; 
+margin:-300px auto auto -250px; 
+top:50%; 
+left:50%; 
+text-align:center; 
+background-color: lightblue;
+visibility: visible;
+}
+.popShow>.card{
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+}
+.popShow>.card>.img-circle{
+	margin-top: 25px;
+	margin-bottom: 25px;
+	cursor: default;
+}
+.closeButton{
+    background:url(../icones/xxx.png) no-repeat;
+    background-size:contain;
+    cursor:pointer;
+    border:none;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 5px;
+    float: right;
+    width: 30px;
+    height: 30px;
+    transition: all 0.2s ease 0s;
+}
+.popHide{
+position:absolute; 
+opacity: 0;
+transition: 0.3s;
+width:500px; 
+height:600px; 
+margin:-300px auto auto -250px; 
+top:50%; 
+left:50%; 
+text-align:center; 
+background-color: lightblue;
+visibility: visible;}
+.popHide>.card{
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+}
+.popHide>.card>.img-circle{
+	margin-top: 25px;
+	margin-bottom: 25px;
+	cursor: pointer;
+}
+.popUpBar {
+	background-color: #00004d;  
+	width: 100%; 
+	height: 35px; 
+	display:block;
+}
