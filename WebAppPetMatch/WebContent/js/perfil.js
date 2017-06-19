@@ -1,3 +1,12 @@
+function build(){
+	var src = document.getElementById("src");
+	var nome = document.getElementById("nome");
+	var contato = document.getElementById("contato");
+	
+	nome.value = sessionStorage.name;
+	contato.value = sessionStorage.email;
+}
+
 function updatePic(){
 	var pic = document.getElementById("pic");
 	var src = document.getElementById("src");

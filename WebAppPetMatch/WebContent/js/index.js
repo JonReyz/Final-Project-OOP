@@ -140,6 +140,28 @@ function buildMenu(){
 function buildDisplay(){
 	var display = document.getElementById("display");
 	
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function() {
+	    if (xhr.readyState == 4) {
+	        var data = xhr.responseText;
+	        if (data!="-1"){
+	        	var tst = JSON.parse(data);
+	            alert(tst);
+	        	for (var i=0; i<tst.length; i++){
+	        		var card;
+	        		var nome = tst[i][1];
+	        		var tam = tst[i][5];
+	        		var peso = tst[i][6];
+	        		var src = tst[i][13];
+	        		card = createCard("fotos/" + src, "popUp('"+nome+"', '"+tam+"', '"+peso+"', 'fotos/" + src + "')");
+	        		display.appendChild(card);
+	        	}
+	        }
+	    }
+	}
+	xhr.open('GET', 'animalsDbServlet?dbcode=SELECT * FROM Animals', true);
+	xhr.send(null);
+	/*
 	display.appendChild(createCard("fotos/1.jpg", "popUp('Jey', '30cm', '7 kg', 'fotos/1.jpg')"));
 	display.appendChild(createCard("fotos/2.jpg", "popUp('Alon', '30cm', '2 kg', 'fotos/2.jpg')"));
 	display.appendChild(createCard("fotos/3.jpg", "popUp('Ownti', '17cm', '1 kg', 'fotos/3.jpg')"));
@@ -148,7 +170,7 @@ function buildDisplay(){
 	display.appendChild(createCard("fotos/6.jpeg", "popUp('Pede', '1 m', '10 kg', 'fotos/6.jpeg')"));
 	display.appendChild(createCard("fotos/7.jpg", "popUp('Tristonho', '30cm', '7 kg', 'fotos/7.jpg')"));
 	display.appendChild(createCard("fotos/8.jpg", "popUp('Folhinha', '20cm', '300 g', 'fotos/8.jpg')"));
-
+*/
 	buildPopUp(display);
 }
 

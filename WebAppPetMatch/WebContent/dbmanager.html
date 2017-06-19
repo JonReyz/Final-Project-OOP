@@ -59,11 +59,12 @@ body{
 
 <body>
 <div class = "screen">
-<div class = "container"><div class = "txt">Usuario: <input type="text" id = "id"></div></div>
-<div class = "container"><div class = "txt">Senha: <input type="text" id = "pass"></div></div>
-<div class = "container"><button class="button" id = "verificar" onclick="checkUser()">Verificar Cadastro</button></div>
-<div class = "container"><button class="button" id = "cadastrar" onclick="newUser()">Cadastrar</button></div>
-<div class = "minicontainer"><div class = "txt" >Cadastro verificado?</div> <div class="txt" id = "cadastro">Nao</div></div>
+
+<div class = "container"><div class = "txt">Execute: <input type="text" id = "id"></div></div>
+
+<div class = "container"><button id = "cadastrar" onclick="testee()">Executar</button></div>
+<div class = "container"><button id = "cadastrar" onclick="testee2()">Query</button></div>
+
 </div>
 
 </body>
@@ -74,31 +75,30 @@ var btCad = document.getElementById('cadastrar');
 var btVer = document.getElementById('verificar');
 var verificado = document.getElementById('cadastro');
 
+/*var arr = [ "John", "Peter", "Sally", "Jane" ];
+var myJSON = JSON.stringify(arr);
+alert(myJSON);
+alert(JSON.parse(myJSON)[0]);
+*/
 var xhr = new XMLHttpRequest();
 xhr.onreadystatechange = function() {
     if (xhr.readyState == 4) {
         var data = xhr.responseText;
-        if (data!="-1"){
-        	var tst = JSON.parse(data);
-            alert(tst[0]);
-        	sessionStorage.name = tst[0][1];
-        	sessionStorage.email = tst[0][2];
-        	sessionStorage.login = tst[0][3];
-        	window.location = "index.html";
-        }
+      //  var tst = JSON.parse(data);
+        alert(data);
     }
 }
 
-
-function checkUser(){
-	xhr.open('GET', 'loginServlet?usu=' + id.value + '&pass=' + pass.value, true);
+function testee(){
+	xhr.open('GET', 'dbman?type=1&dbcode=' + id.value, true);
 	xhr.send(null);
 }
 
-function newUser(){
-	xhr.open('GET', 'newUserServlet?usu=' + id.value + '&pass=' + pass.value, true);
+function testee2(){
+	xhr.open('GET', 'dbman?type=2&dbcode=' + id.value, true);
 	xhr.send(null);
 }
+
 
 </script>
 </html>
