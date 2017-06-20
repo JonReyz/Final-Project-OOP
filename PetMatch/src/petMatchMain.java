@@ -311,11 +311,16 @@ public class petMatchMain {
 		while(op != 3){
 			switch(op){
 				case 0:
-					System.out.println("Sua Lista:");
-					user.printAnimaisInteressantes();
+					if(user.getInterest_list().size() > 0){
+						System.out.println("Sua Lista:");
+						user.printAnimaisInteressantes();
 					
-					System.out.println("Baseado na lista acima, digite o indice do animal que deseja acessar.");
-					user.getInterest_list().get(EntradaTeclado.leInt()).printAnimal();
+						System.out.println("Baseado na lista acima, digite o indice do animal que deseja acessar.");
+						user.getInterest_list().get(EntradaTeclado.leInt()).printAnimal();
+					}
+					else{
+						System.out.println("Sua lista esta vazia. Retorne ao Menu e pesquise alguns animais para adiciona-los!");
+					}
 					
 					break;
 					

@@ -118,14 +118,34 @@ foreign key (animal) references Animals(animal_id),
 
 insert into Users(login,passwd,type) values('admin','admin',0);
 insert into Users(login,passwd,type) values('ong','ong',1);
+insert into Users(login,passwd,type) values('doghelp', 'doghelp',1);
 insert into Guardians(name,email,login) values('Teste de cliente','teste@cliente.com',(select login from Users where login='admin'));
 insert into Ongs(email,adress,phone,cnpj,description,login) values('Ong@email','Rua da ong','32419262','123123123','Uma ong legal',(select login from Users where login='ong'));
-insert into Animals(name,tipo,sexo,status,porte,pelagem, temperamento,email,idade,vacinacao,responsavel,description) values('Obitinho','Cão','M',0,'pequeno','pequeno','dócil','asd@asd',10,0,(select login from Users where login='ong'),'heeey');
+insert into Animals(name,tipo,sexo,status,porte,pelagem, temperamento,idade,vacinacao,responsavel,description) values('Obitinho','cachorro','M',0,'pequeno','pequeno','dócil','asd@asd',10,0,(select login from Users where login='ong'),'heeey');
 
 
 
-insert into Animals(name,tipo,sexo,status,porte,pelagem, temperamento,email,idade,vacinacao,responsavel,description) values('Obitão','Cão','M','0','Grande','Grande','Brabo','asd@asd',3,'0',(select login from Users where login='ong'),'Obitão é brabo')
-insert into Animals(name,tipo,sexo,status,porte,pelagem, temperamento,email,idade,vacinacao,responsavel,description) values('Pillow','Gato','F','0','Pequena','Curto','Dócil','asd@asd',3,'0',(select login from Users where login='ong'),'Uma gatinha fofa')
+insert into Animals(name,tipo,sexo,status,porte,pelagem, temperamento,idade,vacinacao,responsavel,description) values('Obitão','cachorro','M','0','Grande','Grande','Brabo',3,'0',(select login from Users where login='ong'),'Obitão é brabo')
+insert into Animals(name,tipo,sexo,status,porte,pelagem, temperamento,idade,vacinacao,responsavel,description) values('Pillow','gato','F','0','Pequena','Curto','Dócil',3,'0',(select login from Users where login='ong'),'Uma gatinha fofa')
+insert into Animals(name,tipo,sexo,status,porte,pelagem, temperamento,idade,vacinacao,responsavel,description) values('Filé','cachorro','F','0','Grande','Longa','Brincalhona',4,'1',(select login from Users where login='doghelp'),'Vira-lata de Golden')
+insert into Animals(name,tipo,sexo,status,porte,pelagem, temperamento,idade,vacinacao,responsavel,description) values('Rajada','gato','M','0','Pequena','Curto','Saideiro',6,'1',(select login from Users where login='ong'),'Gato amoroso e brincalhao')
+insert into Animals(name,tipo,sexo,status,porte,pelagem, temperamento,idade,vacinacao,responsavel,description) values('Juca','cachorro','M','0','Medio','Curto','Tranquilo',8,'0',(select login from Users where login='doghelp'),'Cão já velhinho, mal dá trabalho')
+insert into Animals(name,tipo,sexo,status,porte,pelagem, temperamento,idade,vacinacao,responsavel,description) values('Doimo Jr.','ave','M','0','Medio','Longa','Companheiro', 2,'0',(select login from Users where login='admin'),'Cacatua abandonada ainda filhote')
+insert into Animals(name,tipo,sexo,status,porte,pelagem, temperamento,idade,vacinacao,responsavel,description) values('Croc','repteis','F','0','Medio','Curto','Reservado',6,'0',(select login from Users where login='ong'),'Iguana companheira para momentos reflexivos')
+insert into Animals(name,tipo,sexo,status,porte,pelagem, temperamento,idade,vacinacao,responsavel,description) values('Raphael','repteis','M','0','Pequeno','Curto','Ativo',3,'0',(select login from Users where login='doghelp'),'Cágado super fofo')
+
+insert into Animals(name,tipo,sexo,status,porte,pelagem, temperamento,idade,vacinacao,responsavel,description) values('Zeca','cachorro','M','0','Medio','Grande','Brabo',4,'1',(select login from Users where login='doghelp'),'Cão protetor e territorial')
+insert into Animals(name,tipo,sexo,status,porte,pelagem, temperamento,idade,vacinacao,responsavel,description) values('Gato','gato','M','0','Pequeno','Longo','Passeadeiro',3,'0',(select login from Users where login='ong'),'Um gato companheiro durante o dia e rueiro durante a noite')
+insert into Animals(name,tipo,sexo,status,porte,pelagem, temperamento,idade,vacinacao,responsavel,description) values('Catioro','cachorro','M','0','Grande','Curto','Bagunceiro',4,'1',(select login from Users where login='doghelp'),'Cão amigável e brincalhão')
+insert into Animals(name,tipo,sexo,status,porte,pelagem, temperamento,idade,vacinacao,responsavel,description) values('Duda','ave','F','0','Pequena','Curto','Cantora',5,'0',(select login from Users where login='doghelp'),'Calopsita cantora')
+insert into Animals(name,tipo,sexo,status,porte,pelagem, temperamento,idade,vacinacao,responsavel,description) values('Jovem','cachorro','M','0','Medio','Curto','Tranquilo',4,'1',(select login from Users where login='doghelp'),'Cão bagunceiro mas muito amoroso')
+insert into Animals(name,tipo,sexo,status,porte,pelagem, temperamento,idade,vacinacao,responsavel,description) values('Golias','cachorro','M','0','Pequeno','Longa','Agressivo', 2,'0',(select login from Users where login='ong'),'Vira-lata de Pinscher com Chihuahua')
+insert into Animals(name,tipo,sexo,status,porte,pelagem, temperamento,idade,vacinacao,responsavel,description) values('Soneca','cachorro','F','0','Pequeno','Curto','Carente',4,'0',(select login from Users where login='ong'),'Basset Hound com cara de sono')
+insert into Animals(name,tipo,sexo,status,porte,pelagem, temperamento,idade,vacinacao,responsavel,description) values('Tortuga','repteis','M','0','Grande','Curto','Solitário',10,'0',(select login from Users where login='admin'),'Jabuti de porte grande')
+
+
+
+
 
 
 
