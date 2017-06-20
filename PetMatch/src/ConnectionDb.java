@@ -5,6 +5,8 @@
  */
 
 import java.sql.*;
+
+import org.apache.derby.iapi.error.StandardException;
 public class ConnectionDb {
 	
 	static String driver = "jdbc:derby:./Data/database;create=true";
@@ -174,8 +176,9 @@ public class ConnectionDb {
 	 * @param u - user que contem o login utilizado para a busca no BD
 	 * @return Guardian guardian - retorna um objeto Guardian para uso
 	 * @throws SQLException
+	 * @throws StandardException 
 	 */
-	public static Guardian getGuardianDB(User u) throws SQLException{
+	public static Guardian getGuardianDB(User u) throws SQLException, StandardException{
 		Statement s;
 		String sql = "select * from Guardians where login='" + u.getLogin() +"'";
 		//System.out.println(sql);

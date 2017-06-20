@@ -1,7 +1,11 @@
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+
+import org.apache.derby.iapi.error.StandardException;
+import org.apache.derby.iapi.sql.ResultSet;
 
 public class Ong extends User{
 	private String name;
@@ -15,7 +19,7 @@ public class Ong extends User{
 	private static final int[] pesoCNPJ = {6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2};
 
 	
-	public Ong() throws IOException{
+	public Ong() throws IOException, StandardException{
 		super(1);
 		String aux;
 		
@@ -44,6 +48,7 @@ public class Ong extends User{
 		description = EntradaTeclado.leString();
 		
 		cadastrados = new ArrayList<Animal>();
+		getAnimalsOng();
 		
 	}
 	
@@ -146,8 +151,9 @@ public class Ong extends User{
 	/**
 	 * Imprime a lista de animais cadastrados pelo usuario
 	 * @throws SQLException 
+	 * @throws StandardException 
 	 */
-	public void printAnimaisCadastrados() throws SQLException{
+	public void printAnimaisCadastrados() throws SQLException, StandardException{
 		for(int i =0 ; i < cadastrados.size(); i++){
 			//imprimir os dados do animal
 			System.out.print(i + ":\n");
@@ -279,6 +285,29 @@ public class Ong extends User{
 		}
 	}
 	
+	public void getAnimalsOng() throws StandardException{
+		Statement s;
+		try {
+			s = ConnectionDb.con.createStatement();
+			ResultSet result = (ResultSet) s.executeQuery("select * from Animals where responsavel = '"+ this.getLogin() +"'");
+			//String sql = "select * from Users where login='"+login + "' and passwd = '"+ passwd +" '";
+			while (((java.sql.ResultSet) result).next()){
+            	String[] v = new String[13];
+            	
+            	for(int i = 1; i <= 12; i++){
+            		v[i] = ((java.sql.ResultSet) result).getString(i);	
+//            		System.out.println("Buscado : "+ i +"  " + v[i]);
+            	}
+            	Animal a = new Animal(v); //copia info do animal
+        		cadastrados.add(a); //adiciona o animal
+			}
+			result.close();
+			s.close();
+		} catch (SQLException e) {
+			System.out.println("Erro ao lista tabela");
+			e.printStackTrace();
+		}
+	}
 
 }
 

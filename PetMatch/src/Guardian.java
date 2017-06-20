@@ -2,7 +2,11 @@
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+
+import org.apache.derby.iapi.error.StandardException;
+import org.apache.derby.iapi.sql.ResultSet;
 
 public class Guardian extends User {
 	private String name; //nome do usuario
@@ -28,13 +32,15 @@ public class Guardian extends User {
 	 * @param u - User contendo info para o super construtor
 	 * @param n - nome do Guardian
 	 * @param e - email do guardian
+	 * @throws StandardException 
 	 */
-	public Guardian(User u, String n, String e) {
+	public Guardian(User u, String n, String e) throws StandardException {
 		super(u.getLogin(),u.getPasswd(),u.getType());
 		name = n;
 		email= e;
 		interest_list = new ArrayList<Animal>();
 		cadastrados = new ArrayList<Animal>();
+		getAnimalsGuardian();
 	}
 
 	public ArrayList<Animal> getCadastrados() {
@@ -85,8 +91,9 @@ public class Guardian extends User {
 	/**
 	 * Imprime a lista de animais interessantes
 	 * @throws SQLException 
+	 * @throws StandardException 
 	 */
-	public void printAnimaisInteressantes() throws SQLException{
+	public void printAnimaisInteressantes() throws SQLException, StandardException{
 		for(int i = 0; i < interest_list.size(); i++){
 			System.out.print(i + ":\n");
 			interest_list.get(i).printAnimal();
@@ -117,8 +124,9 @@ public class Guardian extends User {
 	/**
 	 * Imprime a lista de animais cadastrados pelo usuario
 	 * @throws SQLException 
+	 * @throws StandardException 
 	 */
-	public void printAnimaisCadastrados() throws SQLException{
+	public void printAnimaisCadastrados() throws SQLException, StandardException{
 		for(int i =0 ; i < cadastrados.size(); i++){
 			//imprimir os dados do animal
 			System.out.print(i + ":\n");
@@ -229,7 +237,31 @@ public class Guardian extends User {
 		}
 	}
 	
-	
+	public void getAnimalsGuardian() throws StandardException{
+		Statement s;
+		try {
+			s = ConnectionDb.con.createStatement();
+			
+			java.sql.ResultSet result =  s.executeQuery("select * from Animals where responsavel = '"+ this.getLogin() +"'");
+			//String sql = "select * from Users where login='"+login + "' and passwd = '"+ passwd +" '";
+			while (((java.sql.ResultSet) result).next()){
+	        	String[] v = new String[13];
+	        	
+	        	for(int i = 1; i <= 12; i++){
+	        		v[i] = ((java.sql.ResultSet) result).getString(i);	
+//	        		System.out.println("Buscado : "+ i +"  " + v[i]);
+	        	}
+	        	Animal a = new Animal(v); //copia info do animal
+	    		cadastrados.add(a); //adiciona o animal
+			}
+			result.close();
+			s.close();
+		} catch (SQLException e) {
+			System.out.println("Erro ao lista tabela");
+			e.printStackTrace();
+		}
+	}
+		
 	
 	
 	

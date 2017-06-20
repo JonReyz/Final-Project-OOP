@@ -2,6 +2,8 @@
 import java.io.IOException;
 import java.sql.SQLException;
 
+import org.apache.derby.iapi.error.StandardException;
+
 public class Animal {
 	//foto do cachorro
 	private int id; //id do animal no DB
@@ -231,8 +233,9 @@ public class Animal {
 	/**
 	 * Imprime os dados de um animal
 	 * @throws SQLException 
+	 * @throws StandardException 
 	 */
-	public void printAnimal() throws SQLException{
+	public void printAnimal() throws SQLException, StandardException{
 		
 		//como imprimir a foto?
 		

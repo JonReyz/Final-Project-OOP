@@ -4,16 +4,20 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import org.apache.derby.iapi.error.StandardException;
+
 
 public class petMatchMain {
 
 	/**
 	 * Imprime o menu de um usuario do tipo Ong
 	 * @param user - dados da ONG
+	 * @return int op - operacao para conduzir a continuacao ou nao do programa
 	 * @throws IOException
 	 * @throws SQLException
+	 * @throws StandardException 
 	 */
-	public static void printMenuOng(Ong user) throws IOException, SQLException{
+	public static int printMenuOng(Ong user) throws IOException, SQLException, StandardException{
 		int op = -1;
 		
 				
@@ -53,17 +57,19 @@ public class petMatchMain {
 			op  = EntradaTeclado.leInt();
 		}
 		
-
+		return op;
 		
 	}
 	
 	/**
 	 * Imprime o menu principal para um usuario Guardian (pessoa fisica)
 	 * @param user - Dados do Guardian
+	 * @return int op - operacao para conduzir a continuacao ou nao do programa
 	 * @throws IOException
 	 * @throws SQLException
+	 * @throws StandardException 
 	 */
-	public static void printMenuGuardianMain(Guardian user) throws IOException, SQLException{
+	public static int printMenuGuardianMain(Guardian user) throws IOException, SQLException, StandardException{
 		int op = -1;
 		
 		System.out.println("Para gerenciar sua lista de animais interessantes digite 0;");
@@ -73,25 +79,29 @@ public class petMatchMain {
 		
 		switch(op){
 			case 0:
-				printMenuGuardianInteresses(user);
+				op = printMenuGuardianInteresses(user);
 				break;
 			case 1:
 				busca_filtros(user, 12);//12 - numero de campos da classe Animal
+				
 				break;
 			case 2:
-				printMenuGuardianCadastrados(user);
+				op = printMenuGuardianCadastrados(user);
 				break;
 		}
-	
+		
+		return op;
 	}
 	
 	/**
 	 * Imprime o menu para gerenciamento das adocoes pelo qual o Guardian eh responsavel
 	 * @param user - Dados do Guardian
+	 * @return int op - operacao para conduzir a continuacao ou nao do programa
 	 * @throws IOException
 	 * @throws SQLException
+	 * @throws StandardException 
 	 */
-	public static void printMenuGuardianCadastrados(Guardian user) throws IOException, SQLException{
+	public static int printMenuGuardianCadastrados(Guardian user) throws IOException, SQLException, StandardException{
 		int op = -1;
 		
 		
@@ -131,7 +141,7 @@ public class petMatchMain {
 			op  = EntradaTeclado.leInt();
 		}
 		
-
+		return op;
 		
 	}
 	
@@ -165,7 +175,7 @@ public class petMatchMain {
 	
 	
 	
-	public static void printMenuPesquisa(ArrayList<Animal> lista, Guardian user) throws SQLException, IOException{
+	public static void printMenuPesquisa(ArrayList<Animal> lista, Guardian user) throws SQLException, IOException, StandardException{
 
 		int op = -1;
 		
@@ -198,8 +208,9 @@ public class petMatchMain {
 	 * @param fields - numero de campos na tabela do objeto a ser recuperado no BD
 	 * @throws IOException
 	 * @throws SQLException
+	 * @throws StandardException 
 	 */
-	public static void busca_filtros(Guardian user, int fields) throws IOException, SQLException{
+	public static void busca_filtros(Guardian user, int fields) throws IOException, SQLException, StandardException{
 		String[] filter = gera_filtros();
 		Statement s;
 		int count = 0;
@@ -284,10 +295,12 @@ public class petMatchMain {
 	/**
 	 * Imprime a lista de animais que interessam ao Guardian e oferece as operacoes sobre ela
 	 * @param user - dados do Guardian
+	 * @return int op - operacao para conduzir a continuacao ou nao do programa
 	 * @throws IOException
 	 * @throws SQLException
+	 * @throws StandardException 
 	 */
-	public static void printMenuGuardianInteresses(Guardian user) throws IOException, SQLException{
+	public static int printMenuGuardianInteresses(Guardian user) throws IOException, SQLException, StandardException{
 		int op = -1;
 		
 		user.printAnimaisInteressantes();
@@ -328,7 +341,7 @@ public class petMatchMain {
 			
 		}
 		
-		
+		return op;
 		
 	}
 	
@@ -352,7 +365,7 @@ public class petMatchMain {
 		return user;
 	}
 	
-	public static void main(String[] args) throws IOException, SQLException{
+	public static void main(String[] args) throws IOException, SQLException, StandardException{
 		User user = null;
 		int cad = -1;
 		
@@ -402,17 +415,22 @@ public class petMatchMain {
 				user = verificationLogin(login,senha);
 				if(user == null) System.out.println("Usu�rio ou senha incorreta");
 			}
-			if(user.getType() == 1){ //se for ONG
-				Ong ong = ConnectionDb.getOngDB(user);
-				printMenuOng(ong);
 			
-			}
+			int op = -1;
+			
+			while(user != null && op != 3){
+				if(user.getType() == 1){ //se for ONG
+					Ong ong = ConnectionDb.getOngDB(user);
+					op = printMenuOng(ong);
+			
+				}		
 		
-			else{ //se for pessoa fisica
-				Guardian g = ConnectionDb.getGuardianDB(user);
-				System.out.println("Email : "+ g.getLogin());
-				printMenuGuardianMain(g);
+				else{ //se for pessoa fisica
+					Guardian g = ConnectionDb.getGuardianDB(user);
+					//System.out.println("Email : "+ g.getLogin());
+					op = printMenuGuardianMain(g);
 			
+				}
 			}
 		
 			//ConnectionDb.closeDB();
