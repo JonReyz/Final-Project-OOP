@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Filtrooooo</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="filtros.js"></script>
+
+</head>
+<body>
+<div style="display: flex; height: 100%;">
+	<div id = "menu">
+	<!-- Todo o menu será construído dinamicamente pelo javascript -->	
+	</div>
+
+	<div id = "display">
+		<label>Tipo do Animal</label><select name="tipo" id="tipo">
+    		<option value="-1">Todos</option>
+    		<option value="cachorro">Cachorros</option>
+    		<option value="gato">Gatos</option>
+    		<option value="ave">Aves</option>
+    		<option value="rato">Roedores</option>
+    		<option value="repteis">Repteis</option>
+		</select>
+
+
+		<label>Sexo</label><select name="sexo" id="sexo">
+    		<option value="-1">Qualquer</option>
+    		<option value="M">Macho</option>
+    		<option value="F">Fêmea</option>
+		</select>
+
+
+		<label>Porte</label><input type="text" id="porte">
+
+		<button onclick="getFilter()"/>
+	<!-- Todo o display será construído dinamicamente pelo javascript -->		
+	</div>
+	
+</div>
+</body>
+<script type="text/javascript">
+if(!sessionStorage.login)
+	window.location="login.html"
+
+function getFilter(){
+	var sexo = $("#sexo").val();
+	var tipo = $("#tipo").val();
+	var porte = $("#porte").val();
+	makeQuery(tipo,sexo,porte);
+}
+
+function makeQuery(tipo,sexo,porte){
+		var count = 0;
+		var aux = "";
+		if(tipo != -1){
+			if(count == 0 ) aux += " where ";
+			aux = aux + "tipo='" + tipo + "'";
+			count++;
+		}
+		
+		if(sexo != -1){
+			if(count == 0 ) aux += " where ";
+			else aux+= " and ";
+			count++;
+			aux = aux + " sexo = '" + sexo + "'";
+		}
+		
+		if(porte != ""){
+			if(count == 0 ) aux += " where ";
+			else aux+= " and ";
+			count++;
+			aux = aux + " porte = '" + porte + "'";
+		}
+		alert(aux);
+		sessionStorage.filter = aux;
+		window.location = "index.html";
+}
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

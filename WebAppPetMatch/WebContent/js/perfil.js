@@ -1,3 +1,6 @@
+if(!sessionStorage.login)
+		window.location="login.html"
+
 function build(){
 	var src = document.getElementById("src");
 	var nome = document.getElementById("nome");

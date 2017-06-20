@@ -7,22 +7,29 @@ function menuClick() {
     };
 }
 
-function popUp(name, size, weight, src) {
+function popUp(srcInput, nomeInput, tipoInput, sexInput, porteInput, idadeInput, emailInput) {
     var pop = document.getElementById('pop');
     var nome = document.getElementById('nome');
-    var tam = document.getElementById('tam');
-    var peso = document.getElementById('peso');
+    var porte = document.getElementById('port');
+    var sex = document.getElementById('sex');
+    var idade = document.getElementById('idade');
+    var tipo = document.getElementById('tipo');
     var img = document.getElementById('img');
-    if (name === "-1"){
+    var email = document.getElementById('email');
+    if (srcInput === "-1"){
     	pop.className = "popHide";
         setTimeout(function(){ this.style.display="none"; }.bind(pop), 300);
     } else if(pop.className !== "popShow"){
-    	img.src = src;
+    	img.src = "fotos/" + srcInput;
+        nome.innerHTML = "Nome: " + nomeInput;
+        tipo.innerHTML = "Tipo: " + tipoInput;
+        sex.innerHTML = "Sexo: " + sexInput;
+        porte.innerHTML = "Porte: " + porteInput;
+        idade.innerHTML = "Idade: " + idadeInput;
+        email.innerHTML = "Contato: " + emailInput;
+        
         pop.style.display="block";
         setTimeout(function(){ this.className="popShow"; }.bind(pop), 10);
-        nome.innerHTML = "Nome: " + name;
-        tam.innerHTML = "Tamanho: " + size;
-        peso.innerHTML = "Peso: " + weight;
     }
 }
 
@@ -89,16 +96,31 @@ function buildPopUp(display){
 	popUpCardNome.setAttribute("style", "padding-bottom: 10px; font-size: 50px;");
 	popUpCard.appendChild(popUpCardNome);
 	
-	var popUpCardTam = document.createElement("div");
-	popUpCardTam.setAttribute("id", "tam");
-	popUpCardTam.setAttribute("style", "padding-bottom: 10px; font-size: 30px;");
-	popUpCard.appendChild(popUpCardTam);
+	var popUpCardTipo = document.createElement("div");
+	popUpCardTipo.setAttribute("id", "tipo");
+	popUpCardTipo.setAttribute("style", "padding-bottom: 10px; font-size: 30px;");
+	popUpCard.appendChild(popUpCardTipo);
 	
-	var popUpCardPeso = document.createElement("div");
-	popUpCardPeso.setAttribute("id", "peso");
-	popUpCardPeso.setAttribute("style", "padding-bottom: 10px; font-size: 30px;");
-	popUpCard.appendChild(popUpCardPeso);
+	var popUpCardSex = document.createElement("div");
+	popUpCardSex.setAttribute("id", "sex");
+	popUpCardSex.setAttribute("style", "padding-bottom: 10px; font-size: 30px;");
+	popUpCard.appendChild(popUpCardSex);
+	
+	var popUpCardPorte = document.createElement("div");
+	popUpCardPorte.setAttribute("id", "port");
+	popUpCardPorte.setAttribute("style", "padding-bottom: 10px; font-size: 30px;");
+	popUpCard.appendChild(popUpCardPorte);
+	
+	var popUpCardIdade = document.createElement("div");
+	popUpCardIdade.setAttribute("id", "idade");
+	popUpCardIdade.setAttribute("style", "padding-bottom: 10px; font-size: 30px;");
+	popUpCard.appendChild(popUpCardIdade);
 
+	var popUpCardEmail = document.createElement("div");
+	popUpCardEmail.setAttribute("id", "email");
+	popUpCardEmail.setAttribute("style", "padding-bottom: 10px; font-size: 30px;");
+	popUpCard.appendChild(popUpCardEmail);
+	
 	popUp.appendChild(popUpCard);
 	display.appendChild(popUp);
 }
@@ -132,13 +154,14 @@ function buildMenu(){
 	
 	menu.appendChild(createMenuItem("Perfil", 'window.location = "perfil.html";'));
 	menu.appendChild(createMenuItem("Cadastrar", 'window.location = "cadastro.html";'));
-	menu.appendChild(createMenuItem("Filtros", null));
+	menu.appendChild(createMenuItem("Filtros", 'window.location = "filter.html";'));
 	menu.appendChild(createMenuItem("Log out", 'logOut()'));
 
 }
 
 function buildDisplay(){
 	var display = document.getElementById("display");
+	var filter = sessionStorage.filter ? sessionStorage.filter : "";
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function() {
 	    if (xhr.readyState == 4) {
@@ -148,16 +171,21 @@ function buildDisplay(){
 	        	for (var i=0; i<tst.length; i++){
 	        		var card;
 	        		var nome = tst[i][1];
-	        		var tam = tst[i][5];
-	        		var peso = tst[i][6];
+	        		var tipo = tst[i][2];
+	        		var sex = tst[i][3];
+	        		sex = sex == "M" ? "Macho" : sex;
+	        		sex = sex == "F" ? "Femea" : sex;
+	        		var porte = tst[i][5];
+	        		var idade = tst[i][9];
+	        		var email = tst[i][8];
 	        		var src = tst[i][13];
-	        		card = createCard("fotos/" + src, "popUp('"+nome+"', '"+tam+"', '"+peso+"', 'fotos/" + src + "')");
+	        		card = createCard("fotos/" + src, "popUp('"+src+"', '"+nome+"', '"+tipo+"', '"+sex+"', '"+porte+"', '"+idade+"', '" + email + "')");
 	        		display.appendChild(card);
 	        	}
 	        }
 	    }
 	}
-	xhr.open('GET', 'animalsDbServlet?dbcode=SELECT * FROM Animals', true);
+	xhr.open('GET', 'animalsDbServlet?dbcode=SELECT * FROM Animals' + filter, true);
 	xhr.send(null);
 
 	buildPopUp(display);

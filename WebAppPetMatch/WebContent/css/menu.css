@@ -15,7 +15,7 @@
     transition:1s;
     margin: auto;
 }
-.menuShown > .menuItem > .menuItemIcon {
+.menuItemIcon {
     transition: 0.3s;
     display: inline-block; 
     float: left; 
@@ -56,6 +56,7 @@
     cursor: pointer;
     color: #484848;
     font-size: 30px;
+    height: 30px;
     overflow: hidden;
     padding-right: 10px;
 }
@@ -94,6 +95,7 @@
     margin: auto;
 }
 .menuHidden > .menuItem{
+	font-size: 0 px;
     opacity: 0;
     transition: 0.3s;
 }
