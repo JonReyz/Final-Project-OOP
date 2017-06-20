@@ -48,7 +48,7 @@ public class testServ extends HttpServlet {
 		properties.put("password", "123");
 		// Get a connection
 		try {
-			Connection conn = DriverManager.getConnection("jdbc:derby://192.168.0.26:1527/sample;create=true", properties);
+			Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/sample;create=true", properties);
 			System.out.println("foi?");
 			String sql  = "create table Ongs ("
 					+"ong_id int not null generated always as identity (start with 0, increment by 1),"

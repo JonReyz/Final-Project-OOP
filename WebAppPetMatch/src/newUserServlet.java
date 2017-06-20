@@ -47,26 +47,19 @@ public class newUserServlet extends HttpServlet {
 		properties.put("password", "123");
 		// Get a connection
 		try {
-			Connection conn = DriverManager.getConnection("jdbc:derby://192.168.0.26:1527/sample;create=true", properties);
+			Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/sample;create=true", properties);
 
 			//insert into Users(login,passwd,type) values('admin','admin',0);
 			String sql2 = "INSERT INTO Users(login,passwd,type) VALUES ('" + userInput + "','" + passInput + "',0)" ;
 			Statement s = conn.createStatement();
 			s.execute(sql2);
-			sql2 = "INSERT INTO Guardians(name,email,login) VALUES ('Sem Nome','email@email.com', '" + userInput + "')";
+			sql2 = "INSERT INTO Guardians(name,email,login,foto) VALUES ('Sem Nome','email@email.com', '" + userInput + "','noprofile.png')";
 			s = conn.createStatement();
 			s.execute(sql2);
-         
 			s.close();
-			//Statement s = conn.createStatement();
-			//Se a tabela n�o existe, ela � criada
-			//if(!ConnectionDb.tableExists(conn,"tst")){
-			//	 System.out.println (" . . . . creating table");
-	         //    s.execute(sql);
-			//} 
-			//s.close();
+			response.getWriter().write("1");
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			response.getWriter().write("-1");
 			System.out.println("bug");
 			e.printStackTrace();
 		} 

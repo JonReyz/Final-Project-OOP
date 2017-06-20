@@ -6,9 +6,20 @@ function updatePic(){
 
 function cadastrar(){
 	var nome = document.getElementById("nome").value;
-	var tam = document.getElementById("tam").value;
+	var porte = document.getElementById("port").value;
 	var peso = document.getElementById("peso").value;
 	var src = document.getElementById("src").value;
+	
+	/*
+	 * 
+	<div class = "container"><input type="text" id = "src" style= "font-size: 24px;"></div>
+	<div class = "container"><input type="text" id = "nome" style= "font-size: 24px;"></div>
+	<div class = "container"><input type="text" id = "tipo" style= "font-size: 24px;"></div>
+	<div class = "container"><input type="text" id = "sex" style= "font-size: 24px;"></div>
+	<div class = "container"><input type="text" id = "port" style= "font-size: 24px;"></div>
+	<div class = "container"><input type="text" id = "idade" style= "font-size: 24px;"></div>
+	 * 
+	 */
 	//insert into Animals(name,tipo,sexo,status,porte,pelagem, temperamento,email,idade,vacinacao,responsavel,description,foto) values('Obitão','Cão','M','0','Grande','Grande','Brabo','asd@asd',3,'0',(select login from Users where login='ong'),'Obitão é brabo','foto1')
 	var xhr = new XMLHttpRequest();
 /*	xhr.onreadystatechange = function() {

@@ -1,10 +1,6 @@
-
-
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
@@ -16,16 +12,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class loginServlet
+ * Servlet implementation class perfilUpdateServlet
  */
-@WebServlet("/loginServlet")
-public class loginServlet extends HttpServlet {
+@WebServlet("/perfilUpdateServlet")
+public class perfilUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public loginServlet() {
+    public perfilUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,9 +30,12 @@ public class loginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		String userInput = request.getParameter("usu");
-		String passInput = request.getParameter("pass");
+		String dbCode = request.getParameter("dbcode");
+		/*String src = request.getParameter("src");
+		String nome = request.getParameter("name");
+		String email = request.getParameter("email");*/
+		//response.getWriter().write(typ);
+		// Set user and password properties
 		try {
 			Class.forName("org.apache.derby.jdbc.ClientDriver");
 		} catch (ClassNotFoundException e1) {
@@ -46,44 +45,20 @@ public class loginServlet extends HttpServlet {
 		Properties properties = new Properties();
 		properties.put("user", "user");
 		properties.put("password", "123");
+		
 		// Get a connection
 		try {
 			Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/sample;create=true", properties);
-
-			String sql2 = "SELECT type FROM Users WHERE login = '" + userInput + "' AND passwd='" + passInput + "'" ;
+			System.out.println("Conectado");
+			System.out.println (dbCode);
 			Statement s = conn.createStatement();
-			ResultSet re = s.executeQuery(sql2);
-            if (re.next()){
-            	if(re.getInt(1) == 0){
-            		Statement s2 = conn.createStatement();
-            		String sql = "SELECT * FROM Guardians WHERE login = '" + userInput + "'";
-            		ResultSet re2 = s2.executeQuery(sql);
-            		String ret = "[";
-            		ResultSetMetaData remd = re2.getMetaData();
-            		while (re2.next()) {
-            			if (ret.length()>1)
-         	        		ret+=",";
-         	        	ret += "[";
-         	        	for (int i=1; i <= remd.getColumnCount(); i++){
-         	        		if (i!=1)
-         	        			ret +=",";
-         	        		ret += "\""+re2.getString(i)+"\"";
-         	        	}
-         	        	ret += "]";
-            		}
-            		ret += "]";
-                	response.getWriter().write(ret);
-            	}
-            }
-            else
-            	response.getWriter().write("-1");
-			s.close();
-		} catch (SQLException e) {
-			response.getWriter().write("-1");
-			System.out.println("bug");
-			e.printStackTrace();
-		} 
-		
+			s.execute(dbCode);
+			response.getWriter().write(dbCode);
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		System.out.println("bug");
+		e.printStackTrace();
+	}
 	}
 
 	/**

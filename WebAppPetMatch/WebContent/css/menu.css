@@ -6,7 +6,7 @@
 }
 .menuShown {
     width: 20%;
-    min-width: 160px;
+    min-width: 240px;
     text-align: center;
     background-color: lightblue;
     height: 100%;
@@ -31,7 +31,7 @@
     transition: 0.3s;
     color: #d3d3d3;
     background-color: #004d66;
-    padding-right: 30px;
+    padding-right: 20px;
 }
 .picDiv {
     object-fit: cover; 
@@ -55,9 +55,9 @@
     margin-bottom: 10px;
     cursor: pointer;
     color: #484848;
-    font-size: 25px;
+    font-size: 30px;
     overflow: hidden;
-    padding-right: 40px;
+    padding-right: 10px;
 }
 .menuButton{
     background:url(../icones/out.png) no-repeat;
@@ -84,7 +84,7 @@
 }
 .menuHidden {
     width: 10%;
-    min-width: 80px;
+    min-width: 160px;
     text-align: center;
     background-color: lightblue;
 	height: 100%;
