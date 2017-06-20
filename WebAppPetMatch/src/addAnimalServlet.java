@@ -43,10 +43,10 @@ public class addAnimalServlet extends HttpServlet {
 		Properties properties = new Properties();
 		properties.put("user", "user");
 		properties.put("password", "123");
-		
+		//TIPO; NOME; SEXO; PORTE; IDADE
 		// Get a connection
 		try {
-			Connection conn = DriverManager.getConnection("jdbc:derby://192.168.0.26:1527/sample;create=true", properties);
+			Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/sample;create=true", properties);
 			System.out.println("Conectado");
 			System.out.println (dbCode);
 			Statement s = conn.createStatement();
