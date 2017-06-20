@@ -63,7 +63,7 @@ public class Ong extends User{
 		this.cnpj = cnpj;
 		this.description = des;
 		this.phone = phone;
-		
+		this.cadastrados = new ArrayList<Animal>();
 	}
 
 	public String getEmail() {
@@ -148,12 +148,12 @@ public class Ong extends User{
 	 * @throws SQLException 
 	 */
 	public void printAnimaisCadastrados() throws SQLException{
-		//for(int i =0 ; i < cadastrados.size(); i++){
+		for(int i =0 ; i < cadastrados.size(); i++){
 			//imprimir os dados do animal
-			//System.out.print(i + ":\n");
-			//cadastrados.get(i).printAnimal();
-		//}
-		System.out.println("Finga que aqui tem um dog");
+			System.out.print(i + ":\n");
+			cadastrados.get(i).printAnimal();
+		}
+		//System.out.println("Finga que aqui tem um dog");
 	}
 	/**
 	 * Imprime os dados de uma ONG

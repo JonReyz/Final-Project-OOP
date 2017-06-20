@@ -341,7 +341,7 @@ public class petMatchMain {
 	 */
 	public static User verificationLogin(String login, String passwd) throws SQLException{
 		String sql = "select * from Users where login='"+login + "' and passwd = '"+ passwd +" '";
-		System.out.println(sql);
+		//System.out.println(sql);
 		User user;
 		if(ConnectionDb.sqlExists(sql)){
 			System.out.println("Usu�rio encontrado");

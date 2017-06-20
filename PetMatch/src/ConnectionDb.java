@@ -57,85 +57,7 @@ public class ConnectionDb {
 	}
 	
 	
-	public static void  createTab(String table) throws SQLException{
-		String sql = null;
-		String sql2 = "select * from " + table;
-		
-		if(table.equals("Adoptions")){
-			sql = "create table Adoptions ("
-					+"adp_id int not null generated always as identity (start with 0, increment by 1),"
-					+"guardian varchar(32) not null,"
-					+"animal int not null,"
-					+"CONSTRAINT adp_pk PRIMARY KEY (adp_id),"
-					+"CONSTRAINT adpU_fk FOREIGN KEY (guardian) REFERENCES Users(login),"
-					+"CONSTRAINT adpA_fk FOREIGN KEY (animal) REFERENCES Animals(animal_id)"
-					+")";
-		}
-		
-		if(table.equals("Ongs")){
-			sql = "create table Ongs ("
-					+"ong_id int not null generated always as identity (start with 0, increment by 1),"
-					+"email varchar(32) not null,"
-					+"adress varchar(32) not null,"
-					+"phone varchar(20) not null,"
-					+"cnpj varchar(20) not null,"
-					+"description varchar(100) not null,"
-					+"login varchar(32) not null,"
-					+"CONSTRAINT ong_pk PRIMARY KEY (ong_id),"
-					+"CONSTRAINT ong_fk FOREIGN KEY (login) REFERENCES Users(login)"
-					+")";
-		}
-		
-		if(table.equals("Animals")){
-			sql = "create table Animals ("
-					+"animal_id int not null generated always as identity (start with 0, increment by 1),"
-					+"name varchar(32) not null,"
-					+"tipo varchar(10) not null,"
-					+"sexo char not null,"
-					+"status char not null,"
-					+"porte varchar(10) not null,"
-					+"pelagem varchar(10) not null,"
-					+"temperamento varchar(10) not null,"
-					+"idade int not null,"
-					+"vacinacao char not null,"
-					+"responsavel varchar(32) not null,"
-					+"description varchar(100) not null,"
-					+"CONSTRAINT animals_pk PRIMARY KEY (animal_id),"
-					+"CONSTRAINT animals_fk FOREIGN KEY (responsavel) REFERENCES Users(login)"
-					+")"; 
-		}
-		
-		if(table.equals("User")){
-			sql = "create table Users ("
-					+ "login varchar(32) not null constraint user_pk primary key , "
-					+ "passwd varchar(32) not null," 
-					+ "type int" 
-					+ ")";
-		}
-		
-		if(table.equals("Guardians")){
-			sql = "create table Guardians ("
-					+"guardian_id int not null generated always as identity (start with 0, increment by 1),"
-					+"name varchar(32) not null,"
-					+"email varchar(32) not null,"
-					+"login varchar(32) not null,"
-					+"CONSTRAINT guardians_pk PRIMARY KEY (guardian_id),"
-					+"CONSTRAINT guardians_fk FOREIGN KEY (login) REFERENCES Users(login)"
-					+")";
-			
-		}
-		
-		
-		
-		
-		Statement s = con.createStatement();
-		//Se a tabela n�o existe, ela � criada
-		if(!ConnectionDb.tableExists(con,sql2)){
-			 System.out.println (" . . . . creating table");
-             s.execute(sql);
-		} 
-		s.close();
-	}
+	
 	
 	
 	/**
@@ -227,7 +149,7 @@ public class ConnectionDb {
 	public static User getUserDB(String name) throws SQLException{
 		Statement s;
 		String sql = "select * from Users where login='" + name +"'";
-		System.out.println(sql);
+		//System.out.println(sql);
 		User user = null;
 		try {
 			s = con.createStatement();
@@ -256,7 +178,7 @@ public class ConnectionDb {
 	public static Guardian getGuardianDB(User u) throws SQLException{
 		Statement s;
 		String sql = "select * from Guardians where login='" + u.getLogin() +"'";
-		System.out.println(sql);
+		//System.out.println(sql);
 		Guardian guardian = null;
 		try {
 			s = con.createStatement();
@@ -285,7 +207,7 @@ public class ConnectionDb {
 	public static Ong getOngDB(User u) throws SQLException{
 		Statement s;
 		String sql = "select * from Ongs where login='" + u.getLogin() +"'";
-		System.out.println(sql);
+		//System.out.println(sql);
 		Ong ong = null;
 		try {
 			s = con.createStatement();
