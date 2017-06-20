@@ -160,7 +160,12 @@ function buildMenu(){
 }
 
 function buildDisplay(){
-	var display = document.getElementById("display");
+	var tst = document.getElementById("display");
+	tst.setAttribute("class", "display");
+	var display = document.createElement("div");
+	tst.appendChild(display);
+	display.setAttribute("class", "display");
+	display.setAttribute("style", "width: 100%; height: 100%; background-image: url(); background-color: rgba(0, 0, 0, 0.5);")
 	var filter = sessionStorage.filter ? sessionStorage.filter : "";
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function() {

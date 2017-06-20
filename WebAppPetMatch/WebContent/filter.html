@@ -1,41 +1,51 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Filtrooooo</title>
+<title>PetMatch</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type="text/javascript" src="filtros.js"></script>
-
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="css/cadastro.css">
 </head>
-<body>
-<div style="display: flex; height: 100%;">
-	<div id = "menu">
-	<!-- Todo o menu será construído dinamicamente pelo javascript -->	
+<body style="background-image: url(background/fundo2.png); background-size: 35%; margin: 0px">
+	<div style = "height: 50px; float: top; background-color: rgb(78, 170, 123);">
+		<div onclick="back()" style = "object-fit: cover; width: auto; height: calc(100% - 10px);  overflow: hidden; padding: 5px 25px;">
+			<img style="object-fit: cover; height: 100%; width: auto; cursor: pointer;" src='icones/back.png' >
+		</div>
 	</div>
+	<div style = "height: 100%; width: 100%; background-color: rgba(0, 0, 0, 0.5);">
+		<div class = "screen" style="padding-top: 15%;">
+	<div class = "container" style = "position: relative; text-align: center; height: 290px;">
+	<div style="display: inline-block; width: 40%; position: absolute; right: 50%">
+	<div class = "container"><div class = "txt">Tipo: </div></div>
+	<div class = "container"><div class = "txt">Sexo: </div></div>
+	<div class = "container"><div class = "txt">Porte: </div></div>
+	</div>
+	<div style="display: inline-block; width: 40%; top: 0px; position: absolute; left:50%">
+	<div class = "container">
 
-	<div id = "display">
-		<label>Tipo do Animal</label><select name="tipo" id="tipo">
+	<select id="tipo" style="font-size: 25px">
     		<option value="-1">Todos</option>
     		<option value="cachorro">Cachorros</option>
     		<option value="gato">Gatos</option>
     		<option value="ave">Aves</option>
     		<option value="rato">Roedores</option>
     		<option value="repteis">Repteis</option>
-		</select>
-
-
-		<label>Sexo</label><select name="sexo" id="sexo">
+    </select>
+	<!-- <input type="text" id = "tipo" style= "font-size: 24px;"> -->
+	</div>
+	<div class = "container">
+		<select id="sexo" style="font-size: 25px">
     		<option value="-1">Qualquer</option>
     		<option value="M">Macho</option>
-    		<option value="F">Fêmea</option>
-		</select>
-
-
-		<label>Porte</label><input type="text" id="porte">
-
-		<button onclick="getFilter()"/>
-	<!-- Todo o display será construído dinamicamente pelo javascript -->		
+    		<option value="F">Femea</option>
+    	</select>
+	<!-- <input type="text" id = "sex" style= "font-size: 24px;"> -->
 	</div>
-	
+	<div class = "container"><input type="text" id = "porte" style= "font-size: 24px;"></div>
+	</div>
+	</div>
+	<div class = "container"><button class="button" onclick="getFilter()">Aplicar Filtro</button></div>
+	</div>
 </div>
 </body>
 <script type="text/javascript">
@@ -71,9 +81,12 @@ function makeQuery(tipo,sexo,porte){
 			count++;
 			aux = aux + " porte = '" + porte + "'";
 		}
-		alert(aux);
 		sessionStorage.filter = aux;
 		window.location = "index.html";
+}
+
+function back(){
+	window.location = "index.html";
 }
 </script>
 </html>

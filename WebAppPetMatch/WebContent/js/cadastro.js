@@ -17,20 +17,19 @@ function cadastrar(){
 	
 	//insert into Animals(name,tipo,sexo,status,porte,pelagem, temperamento,email,idade,vacinacao,responsavel,description,foto) values('Obitão','Cão','M','0','Grande','Grande','Brabo','asd@asd',3,'0',(select login from Users where login='ong'),'Obitão é brabo','foto1')
 	var xhr = new XMLHttpRequest();
-/*	xhr.onreadystatechange = function() {
+	xhr.onreadystatechange = function() {
 	    if (xhr.readyState == 4) {
 	        var data = xhr.responseText;
-	        if (data!="-1"){
-	        	var tst = JSON.parse(data);
-	            alert(tst[0]);
-	        	sessionStorage.name = tst[0][1];
-	        	sessionStorage.email = tst[0][2];
-	        	sessionStorage.login = tst[0][3];
+	        if (data=="-1"){
+	        	alert("Nao foi possivel concluir o cadastro do animal.");
+	        }
+	        else if(data=="1"){
+	        	alert("Animal cadastrado com sucesso!");
 	        	window.location = "index.html";
 	        }
 	    }
-	}*/
-	xhr.open('GET', "addAnimalServlet?dbcode=insert into Animals(name,tipo,sexo,status,porte,pelagem, temperamento,email,idade,vacinacao,responsavel,description,foto) values('"+nome+"','" + tipo + "','" + sex + "','0','"+porte+"','com pelo','Brabo','" + sessionStorage.email + "'," + idade + ",'0','" + sessionStorage.login + "','Obitão é brabo','"+src+"')");
+	}
+	xhr.open('GET', "addAnimalServlet?dbcode=insert into Animals(name,tipo,sexo,status,porte,pelagem, temperamento,email,idade,vacinacao,responsavel,description,foto) values('"+nome+"','" + tipo + "','" + sex + "','0','"+porte+"','com pelo','Brabo','-'," + idade + ",'0','" + sessionStorage.login + "','Obitão é brabo','"+src+"')");
 	xhr.send(null);
 }
 

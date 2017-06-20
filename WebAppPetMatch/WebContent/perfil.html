@@ -9,12 +9,13 @@
 <script src="js/perfil.js"></script>
 
 </head>
-<body  onload="build()">
-	<div style = "height: 50px; float: top; background-color: lightblue;">
+<body  onload="build()" style="background-image: url(background/fundo2.png); background-size: 35%;">
+	<div style = "height: 50px; float: top; background-color: rgb(78, 170, 123);" >
 		<div onclick="back()" style = "object-fit: cover; width: auto; height: calc(100% - 10px);  overflow: hidden; padding: 5px 25px;">
 			<img style="object-fit: cover; height: 100%; width: auto; cursor: pointer;" src='icones/back.png' >
 		</div>
 	</div>
+	<div style = "height: 100%; width: 100%; background-color: rgba(0, 0, 0, 0.5);">
 	<div class = "screen">
 		<div class = "card"><img class="img-circle" src='perfil/noprofile.png' id="pic" style = "cursor: default;"></div></div>
 		<div class = "container" style = "position: relative; text-align: center; height: 200px;">
@@ -31,5 +32,6 @@
 	</div>
 	<div class = "container"><button id = "cadastrar" class="button" onclick="updatePic()">Vizualizar foto</button></div>
 	<div class = "container"><button class="button" onclick="updateUser()">Salvar Mudancas</button></div>
+</div>
 </body>
 </html>

@@ -51,9 +51,10 @@ public class addAnimalServlet extends HttpServlet {
 			System.out.println (dbCode);
 			Statement s = conn.createStatement();
 			s.execute(dbCode);
-			response.getWriter().write(dbCode);
+			response.getWriter().write("1");
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
+		response.getWriter().write("-1");
 		System.out.println("bug");
 		e.printStackTrace();
 	}
