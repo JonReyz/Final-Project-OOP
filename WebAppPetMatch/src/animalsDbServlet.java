@@ -55,11 +55,11 @@ public class animalsDbServlet extends HttpServlet {
 		    ResultSet re = s.executeQuery(dbCode);
 		    ResultSetMetaData remd = re.getMetaData();
 		    re.next();
-		    String login = re.getString(12);
-		    System.out.println(login);
-		    Statement s2 = conn.createStatement();
+		  //  String login = re.getString(12);
+		  //  System.out.println(login);
+		 /*   Statement s2 = conn.createStatement();
 		    ResultSet re2 = s2.executeQuery("SELECT email FROM Guardians WHERE login = '" + login + "'");
-		    re2.next();
+		    re2.next();*/
 		    String ret = "[";//11
 		    do{
 		       	if (ret.length()>1)
@@ -68,8 +68,15 @@ public class animalsDbServlet extends HttpServlet {
 		       	for (int i=1; i <= remd.getColumnCount(); i++){
 		       		if (i!=1)
 		       			ret +=",";
-		       		if (i==9)
+		       		if (i==9){
+		       			String login = re.getString(12);
+		       			System.out.println(login);
+		       			Statement s2 = conn.createStatement();
+		    		    ResultSet re2 = s2.executeQuery("SELECT email FROM Guardians WHERE login = '" + login + "'");
+		    		    re2.next();
 		       			ret += "\""+re2.getString(1)+"\"";
+		       			s2.close();
+		       		}
 		       		else
 		       			ret += "\""+re.getString(i)+"\"";
 		       	}
@@ -79,7 +86,7 @@ public class animalsDbServlet extends HttpServlet {
 		    ret+="]";
 		    response.getWriter().write(ret);
 			s.close();
-			s2.close();
+			//s2.close();
 		}catch (SQLException e) {
 			// TODO Auto-generated catch block
 			System.out.println("bug");
